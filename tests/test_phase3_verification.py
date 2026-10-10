@@ -32,7 +32,9 @@ def test_production_source_matches_metadata():
         "HOUSEHOLD_LENDING_RATE": ("European Central Bank", "MIR/M.DE.B.A2C.A.R.A.2250.EUR.N"),
         "LIFE_EXPECTANCY": ("World Bank", "SP.DYN.LE00.IN"),
         "TRADE_BALANCE_GDP": ("World Bank", "NE.RSB.GNFS.ZS"),
-        "AVG_ANNUAL_WAGE": ("World Bank", "NY.GDP.PCAP.CD")
+        "AVG_ANNUAL_WAGE": ("World Bank", "NY.GDP.PCAP.CD"),
+        "MINIMUM_MONTHLY_WAGE": ("Eurostat", "earn_mw_cur"),
+        "AVG_NET_ANNUAL_SALARY": ("Eurostat", "earn_nt_net")
     }
 
     for ind_id, (exp_prov, exp_dcode) in expected_sources.items():

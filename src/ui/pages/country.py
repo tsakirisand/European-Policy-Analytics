@@ -80,32 +80,34 @@ def render(df_obs: pd.DataFrame):
                 continue
 
             # Render key indicator cards for domain
-            grid_cols = st.columns(min(len(domain_indicators), 3))
-            
-            for ind_idx, ind in enumerate(domain_indicators[:3]):
-                with grid_cols[ind_idx % 3]:
-                    df_ind = df_country[df_country["indicator_id"] == ind["id"]].sort_values(by="period")
-                    if not df_ind.empty:
-                        latest_row = df_ind.iloc[-1]
-                        val = latest_row["value"]
-                        period = int(latest_row["period"])
+            num_cols = min(len(domain_indicators), 4)
+            for chunk_start in range(0, len(domain_indicators), num_cols):
+                chunk = domain_indicators[chunk_start:chunk_start + num_cols]
+                grid_cols = st.columns(len(chunk))
+                for ind_idx, ind in enumerate(chunk):
+                    with grid_cols[ind_idx]:
+                        df_ind = df_country[df_country["indicator_id"] == ind["id"]].sort_values(by="period")
+                        if not df_ind.empty:
+                            latest_row = df_ind.iloc[-1]
+                            val = latest_row["value"]
+                            period = int(latest_row["period"])
 
-                        prev_val = df_ind.iloc[-2]["value"] if len(df_ind) > 1 else None
-                        
-                        is_pp = ind["change_type"] == "pct_point"
-                        change = calculate_percentage_point_change(prev_val, val) if is_pp else calculate_percentage_change(prev_val, val)
+                            prev_val = df_ind.iloc[-2]["value"] if len(df_ind) > 1 else None
+                            
+                            is_pp = ind["change_type"] == "pct_point"
+                            change = calculate_percentage_point_change(prev_val, val) if is_pp else calculate_percentage_change(prev_val, val)
 
-                        render_metric_card(
-                            title=ind["short_name"],
-                            value_str=f"{val:,.2f}" if val < 1000 else f"{val:,.0f}",
-                            unit_str=ind["unit_symbol"],
-                            change_val=change,
-                            change_label=f"vs {period - 1}",
-                            is_percentage_point=is_pp,
-                            better_direction=ind["better_direction"]
-                        )
-                    else:
-                        st.info(f"No observations available for {ind['short_name']}")
+                            render_metric_card(
+                                title=ind["short_name"],
+                                value_str=f"{val:,.2f}" if val < 1000 else f"{val:,.0f}",
+                                unit_str=ind["unit_symbol"],
+                                change_val=change,
+                                change_label=f"vs {period - 1}",
+                                is_percentage_point=is_pp,
+                                better_direction=ind["better_direction"]
+                            )
+                        else:
+                            st.info(f"No observations available for {ind['short_name']}")
 
             st.markdown("<br>", unsafe_allow_html=True)
 

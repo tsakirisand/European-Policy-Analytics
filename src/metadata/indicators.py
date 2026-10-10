@@ -216,6 +216,36 @@ INDICATORS: Dict[str, IndicatorMeta] = {
         "change_type": "pct",
         "better_direction": "high"
     },
+    "MINIMUM_MONTHLY_WAGE": {
+        "id": "MINIMUM_MONTHLY_WAGE",
+        "domain_id": "LABOUR",
+        "name": "National Statutory Minimum Monthly Wage",
+        "short_name": "Minimum Monthly Wage",
+        "description": "National statutory monthly minimum wage expressed in Euros (Eurostat earn_mw_cur). Applies to countries with statutory minimum wages.",
+        "unit": "Euros per month",
+        "unit_symbol": "€",
+        "frequency": "Annual / Bi-annual",
+        "source_provider": "Eurostat",
+        "source_dataset_code": "earn_mw_cur",
+        "source_url": "https://ec.europa.eu/eurostat/databrowser/view/earn_mw_cur/default/table",
+        "change_type": "pct",
+        "better_direction": "high"
+    },
+    "AVG_NET_ANNUAL_SALARY": {
+        "id": "AVG_NET_ANNUAL_SALARY",
+        "domain_id": "LABOUR",
+        "name": "Average Net Annual Salary",
+        "short_name": "Average Net Salary",
+        "description": "Average annual net earnings for a single worker without children earning 100% of average wage (Eurostat earn_nt_net).",
+        "unit": "Euros per year",
+        "unit_symbol": "€",
+        "frequency": "Annual",
+        "source_provider": "Eurostat",
+        "source_dataset_code": "earn_nt_net",
+        "source_url": "https://ec.europa.eu/eurostat/databrowser/view/earn_nt_net/default/table",
+        "change_type": "pct",
+        "better_direction": "high"
+    },
     "POVERTY_RISK_RATE": {
         "id": "POVERTY_RISK_RATE",
         "domain_id": "DEMO_SOCIAL",

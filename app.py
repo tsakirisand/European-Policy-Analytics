@@ -1,6 +1,7 @@
 """
 European Policy Analytics - Main Application Entry Point.
 Real data European economic, social, financial, demographic, and environmental research platform.
+Updated with Minimum Monthly Wage & Average Net Salary indicators.
 """
 
 import streamlit as st
