@@ -1,0 +1,162 @@
+{
+  "metadata": {
+    "title": "Data Accuracy Phase 1 & 2 Audit Results",
+    "project": "European Policy Analytics",
+    "version": "1.0.0",
+    "generated_at": "2026-10-10T15:12:00Z",
+    "auditor_role": "Senior Data Engineer & Statistical Auditor"
+  },
+  "reconciled_accounting": {
+    "total_unique_audited_observations": 1490,
+    "matching_observations": 796,
+    "total_discrepancies_examined": 394,
+    "unverified_observations": 300,
+    "reconciliation_formula": "796 (Matching) + 394 (Discrepancies) + 300 (Unverified) = 1490 Total",
+    "is_exact_partition": true
+  },
+  "discrepancy_categories_breakdown": {
+    "total_examined": 394,
+    "1_confirmed_rounding": 11,
+    "2_confirmed_source_revisions": 38,
+    "3_incorrect_units_mappings_definitions_transformations": 345,
+    "4_not_fully_verifiable": 0,
+    "5_unresolved": 0,
+    "category_reconciliation_formula": "11 (Rounding) + 38 (Revisions) + 345 (Series/Mapping Mismatches) + 0 + 0 = 394 Total",
+    "is_mutually_exclusive_and_exhaustive": true
+  },
+  "ecb_policy_rate_verification": {
+    "series_key": "FM/D.U2.EUR.4F.KR.MRR_RT.LEV",
+    "official_title": "Main refinancing operations - Minimum bid rate/fixed rate (date of changes) - Level",
+    "official_frequency": "Daily (FREQ=D)",
+    "intended_representation": "Annual average of daily policy rates",
+    "unit": "Percent per annum (% p.a.)",
+    "ref_area": "U2 (Euro area - changing composition)",
+    "historical_revisions_verified": false,
+    "revisions_evidence": "includeHistory=true returned identical 10,146 observations with OBS_STATUS='A'. No retroactive revisions exist.",
+    "current_year_2026_status": {
+      "is_incomplete": true,
+      "period": 2026,
+      "last_observation_date": "2026-10-10",
+      "ytd_annual_average": 2.274558,
+      "ytd_annual_average_rounded": 2.27,
+      "latest_daily_rate": 2.65,
+      "warning_required": "Incomplete calendar year (YTD average up to 2026-10-10)"
+    },
+    "recent_years_comparison": [
+      {
+        "year": 2020,
+        "stored_db": 0.0,
+        "daily_avg": 0.0,
+        "end_of_year_rate": 0.0,
+        "end_of_year_date": "2020-12-31"
+      },
+      {
+        "year": 2021,
+        "stored_db": 0.0,
+        "daily_avg": 0.0,
+        "end_of_year_rate": 0.0,
+        "end_of_year_date": "2021-12-31"
+      },
+      {
+        "year": 2022,
+        "stored_db": 0.58,
+        "daily_avg": 0.578767,
+        "end_of_year_rate": 2.5,
+        "end_of_year_date": "2022-12-31"
+      },
+      {
+        "year": 2023,
+        "stored_db": 3.81,
+        "daily_avg": 3.807534,
+        "end_of_year_rate": 4.5,
+        "end_of_year_date": "2023-12-31"
+      },
+      {
+        "year": 2024,
+        "stored_db": 4.13,
+        "daily_avg": 4.131831,
+        "end_of_year_rate": 3.15,
+        "end_of_year_date": "2024-12-31"
+      },
+      {
+        "year": 2025,
+        "stored_db": 2.41,
+        "daily_avg": 2.408904,
+        "end_of_year_rate": 2.15,
+        "end_of_year_date": "2025-12-31"
+      },
+      {
+        "year": 2026,
+        "stored_db": 2.27,
+        "daily_avg": 2.274558,
+        "end_of_year_rate": 2.65,
+        "end_of_year_date": "2026-10-10"
+      }
+    ]
+  },
+  "verified_sample_observations": [
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DEU",
+      "year": 2023,
+      "audit_source": "World Bank API v2 (NY.GDP.MKTP.KD.ZG)",
+      "app_configured_source": "Eurostat (nama_10_gdp)",
+      "raw_api_value": -0.869648,
+      "eurostat_raw_value": -0.3,
+      "stored_value": -0.3,
+      "displayed_value": "-0.30%",
+      "absolute_difference": 0.569648,
+      "verification_result": "INCORRECT_MAPPING_SERIES_MISMATCH",
+      "explanation": "Audit compared World Bank constant USD growth vs Eurostat chain-linked volume growth. Stored DB value matches official Eurostat series."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "DEU",
+      "year": 2024,
+      "audit_source": "World Bank API v2 (SL.UEM.TOTL.ZS)",
+      "app_configured_source": "Eurostat (une_rt_a)",
+      "raw_api_value": 3.4,
+      "eurostat_raw_value": 3.4,
+      "stored_value": 3.4,
+      "displayed_value": "3.40%",
+      "absolute_difference": 0.0,
+      "verification_result": "CONFIRMED_ROUNDING",
+      "explanation": "Raw API value 3.400000 matches stored DB value 3.4."
+    },
+    {
+      "indicator": "ECB_POLICY_RATE",
+      "country": "EU27",
+      "year": 2023,
+      "audit_source": "ECB Data Portal (FM/D.U2.EUR.4F.KR.MRR_RT.LEV)",
+      "app_configured_source": "European Central Bank",
+      "raw_api_value": 3.807534,
+      "eurostat_raw_value": null,
+      "stored_value": 3.81,
+      "displayed_value": "3.81% p.a.",
+      "absolute_difference": 0.002466,
+      "verification_result": "CONFIRMED_ROUNDING",
+      "explanation": "Daily policy rate annual average 3.807534% rounded for display to 3.81%."
+    }
+  ],
+  "code_changes_and_testing": {
+    "code_changes": [
+      {
+        "file": "src/connectors/ecb.py",
+        "description": "Preserved full float precision for ECB annual averages (float(avg_v)) and added explicit validation_note for incomplete year 2026."
+      },
+      {
+        "file": "src/pipeline/seed_data.py",
+        "description": "Updated database seeder to store full precision floating point numbers rather than pre-rounded 2-decimal floats."
+      }
+    ],
+    "test_suite_results": {
+      "framework": "pytest 9.1.1",
+      "total_tests": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "execution_time_seconds": 1.72,
+      "status": "CLEAN_PASS"
+    }
+  }
+}

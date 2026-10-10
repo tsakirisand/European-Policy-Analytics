@@ -1,0 +1,17 @@
+indicator_id,displayed_name,production_api_provider,production_series_dataset_code,metadata_declared_provider,metadata_declared_dataset_code,exact_definition,unit,reference_period_convention,metadata_ingestion_agreement,total_stored_observations
+GDP_REAL_GROWTH,Real GDP Growth Rate,Eurostat,nama_10_gdp,Eurostat,nama_10_gdp,"Chain linked volumes, percentage change on previous period",%,Annual,YES,1015
+GDP_PC_PPP,GDP per Capita in Purchasing Power Standards (PPS),Eurostat,nama_10_pc,Eurostat,nama_10_pc,Gross domestic product per inhabitant in PPS (EU27=100),PPS (EU27=100),Annual,YES,1016
+HICP_INFLATION,Harmonised Index of Consumer Prices (HICP) Inflation,Eurostat,prc_hicp_aind,Eurostat,prc_hicp_aind,Annual average rate of change in Harmonised Index of Consumer Prices,%,Annual,YES,972
+UNEMP_RATE,Total Unemployment Rate,Eurostat,une_rt_a,Eurostat,une_rt_a,Unemployed persons aged 15-74 as % of active labor force (LFS),%,Annual,YES,857
+YOUTH_UNEMP_RATE,Youth Unemployment Rate (Under 25),Eurostat,une_rt_a,Eurostat,une_rt_a,Unemployed persons aged 15-24 as % of youth labor force (LFS),%,Annual,YES,856
+GOV_DEBT_GDP,General Government Gross Debt (% of GDP),Eurostat,gov_10dd_edpt1,Eurostat,gov_10dd_edpt1,General government gross consolidated debt at face value (% of GDP),% of GDP,Annual,YES,989
+GOV_DEFICIT_GDP,General Government Net Lending / Net Borrowing (% of GDP),Eurostat,gov_10dd_edpt1,Eurostat,gov_10dd_edpt1,General government net lending (+) / net borrowing (-) (% of GDP),% of GDP,Annual,YES,895
+POPULATION,Total Population on 1st January,Eurostat,demo_gind,Eurostat,demo_gind,Total population on 1st January of reference year,inhabitants,Annual,YES,1211
+RENEWABLE_ENERGY_SHARE,Share of Renewable Energy in Gross Final Energy Consumption,Eurostat,nrg_ind_ren,Eurostat,nrg_ind_ren,Share of renewable energy in gross final energy consumption,%,Annual,YES,854
+GHG_EMISSIONS,Greenhouse Gas Emissions,Eurostat,env_air_gge,Eurostat,env_air_gge,Total greenhouse gas emissions (in thousand tonnes CO2 eq),k tonnes CO2eq,Annual,YES,1085
+ECB_POLICY_RATE,ECB Main Refinancing Operations Policy Interest Rate,European Central Bank,FM/D.U2.EUR.4F.KR.MRR_RT.LEV,European Central Bank,FM/D.U2.EUR.4F.KR.MRR_RT.LEV,ECB Main Refinancing Operations Rate (Time-Weighted Annual Average),% p.a.,Annual average (Time-Weighted),YES,27
+HOUSEHOLD_LENDING_RATE,Bank Interest Rate on Household Loans for House Purchase,European Central Bank,MIR/M.DE.B.A2C.A.R.A.2250.EUR.N,European Central Bank,MIR/M.DE.B.A2C.A.R.A.2250.EUR.N,Bank interest rate on loans to households for house purchase,% p.a.,Annual average,YES,27
+AVG_ANNUAL_WAGE,Gross Domestic Product per Capita (Current USD),World Bank,NY.GDP.PCAP.CD,World Bank,NY.GDP.PCAP.CD,Gross domestic product per capita in current US dollars,$,Annual,YES,52
+POVERTY_RISK_RATE,At-Risk-of-Poverty or Social Exclusion Rate (AROPE),Eurostat,ilc_peps01n,Eurostat,ilc_peps01n,At-risk-of-poverty or social exclusion rate (AROPE),%,Annual,YES,350
+TRADE_BALANCE_GDP,Trade Balance in Goods (% of GDP),World Bank,NE.RSB.GNFS.ZS,World Bank,NE.RSB.GNFS.ZS,External balance on goods and services (% of GDP),% of GDP,Annual,YES,52
+LIFE_EXPECTANCY,Life Expectancy at Birth,World Bank,SP.DYN.LE00.IN,World Bank,SP.DYN.LE00.IN,Life expectancy at birth (mean years),years,Annual,YES,50

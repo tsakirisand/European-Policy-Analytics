@@ -1,0 +1,37 @@
+# Python Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+*.so
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Databases & Local Logs
+*.db
+*.sqlite3
+*.db-journal
+*.log
+
+# IDE & OS Generated Files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary Scratch Directory
+scratch/

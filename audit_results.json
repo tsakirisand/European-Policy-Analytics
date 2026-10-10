@@ -1,0 +1,1352 @@
+{
+  "timestamp": "2026-10-10",
+  "total_indicators_audited": 16,
+  "total_sample_checked": 450,
+  "matching_observations": 279,
+  "discrepancies": 121,
+  "not_verified": 50,
+  "indicator_audit": [
+    {
+      "indicator_id": "GDP_REAL_GROWTH",
+      "name": "Real GDP Growth Rate",
+      "source_provider": "Eurostat / World Bank",
+      "dataset_code": "NY.GDP.MKTP.KD.ZG",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 24,
+      "discrepancies_count": 26
+    },
+    {
+      "indicator_id": "UNEMP_RATE",
+      "name": "Total Unemployment Rate",
+      "source_provider": "Eurostat",
+      "dataset_code": "SL.UEM.TOTL.ZS",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 16,
+      "discrepancies_count": 34
+    },
+    {
+      "indicator_id": "HICP_INFLATION",
+      "name": "Harmonised Index of Consumer Prices (HICP) Inflation",
+      "source_provider": "Eurostat",
+      "dataset_code": "FP.CPI.TOTL.ZG",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 7,
+      "discrepancies_count": 43
+    },
+    {
+      "indicator_id": "POPULATION",
+      "name": "Total Population on 1st January",
+      "source_provider": "Eurostat / World Bank",
+      "dataset_code": "SP.POP.TOTL",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 32,
+      "discrepancies_count": 18
+    },
+    {
+      "indicator_id": "LIFE_EXPECTANCY",
+      "name": "Life Expectancy at Birth",
+      "source_provider": "Eurostat / World Bank",
+      "dataset_code": "SP.DYN.LE00.IN",
+      "verified": false,
+      "samples_checked": 50,
+      "samples_matched": 0,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "GDP_PC_PPP",
+      "name": "GDP per Capita in Purchasing Power Standards (PPS)",
+      "source_provider": "Eurostat",
+      "dataset_code": "nama_10_pc",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 50,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "YOUTH_UNEMP_RATE",
+      "name": "Youth Unemployment Rate (Under 25)",
+      "source_provider": "Eurostat",
+      "dataset_code": "une_rt_a",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 50,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "GOV_DEBT_GDP",
+      "name": "General Government Gross Debt (% of GDP)",
+      "source_provider": "Eurostat",
+      "dataset_code": "gov_10dd_edpt1",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 50,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "GOV_DEFICIT_GDP",
+      "name": "General Government Net Lending / Net Borrowing (% of GDP)",
+      "source_provider": "Eurostat",
+      "dataset_code": "gov_10dd_edpt1",
+      "verified": false,
+      "samples_checked": 0,
+      "samples_matched": 0,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "RENEWABLE_ENERGY_SHARE",
+      "name": "Share of Renewable Energy in Gross Final Energy Consumption",
+      "source_provider": "Eurostat",
+      "dataset_code": "nrg_ind_ren",
+      "verified": true,
+      "samples_checked": 50,
+      "samples_matched": 50,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "GHG_EMISSIONS",
+      "name": "Greenhouse Gas Emissions",
+      "source_provider": "Eurostat",
+      "dataset_code": "env_air_gge",
+      "verified": false,
+      "samples_checked": 0,
+      "samples_matched": 0,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "POVERTY_RISK_RATE",
+      "name": "At-Risk-of-Poverty or Social Exclusion Rate (AROPE)",
+      "source_provider": "Eurostat",
+      "dataset_code": "ilc_peps01n",
+      "verified": false,
+      "samples_checked": 0,
+      "samples_matched": 0,
+      "discrepancies_count": 0
+    },
+    {
+      "indicator_id": "TRADE_BALANCE_GDP",
+      "name": "Trade Balance in Goods (% of GDP)",
+      "source_provider": "Eurostat",
+      "dataset_code": "ext_lt_mainec",
+      "verified": false,
+      "samples_checked": 0,
+      "samples_matched": 0,
+      "discrepancies_count": 0
+    }
+  ],
+  "findings": [
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DEU",
+      "period": 2023,
+      "official_value": -0.869647578573321,
+      "application_value": -0.3,
+      "difference": 0.5696,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-0.869647578573321) and DB (-0.3)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DEU",
+      "period": 2021,
+      "official_value": 3.90999994204108,
+      "application_value": 3.2,
+      "difference": 0.71,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.90999994204108) and DB (3.2)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DNK",
+      "period": 2024,
+      "official_value": 3.47783593140312,
+      "application_value": 1.58,
+      "difference": 1.8978,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.47783593140312) and DB (1.58)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DNK",
+      "period": 2023,
+      "official_value": 0.604587766175584,
+      "application_value": 2.2,
+      "difference": 1.5954,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.604587766175584) and DB (2.2)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DNK",
+      "period": 2022,
+      "official_value": 0.443832614908331,
+      "application_value": 2.82,
+      "difference": 2.3762,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.443832614908331) and DB (2.82)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DNK",
+      "period": 2021,
+      "official_value": 6.50025445756295,
+      "application_value": 8.72,
+      "difference": 2.2197,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.50025445756295) and DB (8.72)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "DNK",
+      "period": 2020,
+      "official_value": -1.78010601831291,
+      "application_value": -2.73,
+      "difference": 0.9499,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-1.78010601831291) and DB (-2.73)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ESP",
+      "period": 2024,
+      "official_value": 3.45525405630191,
+      "application_value": 2.7,
+      "difference": 0.7553,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.45525405630191) and DB (2.7)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ESP",
+      "period": 2022,
+      "official_value": 6.37031712129601,
+      "application_value": 5.8,
+      "difference": 0.5703,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.37031712129601) and DB (5.8)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "IRL",
+      "period": 2024,
+      "official_value": 2.59946721553708,
+      "application_value": 1.2,
+      "difference": 1.3995,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.59946721553708) and DB (1.2)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "IRL",
+      "period": 2023,
+      "official_value": -2.53637409313261,
+      "application_value": -3.2,
+      "difference": 0.6636,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-2.53637409313261) and DB (-3.2)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "IRL",
+      "period": 2022,
+      "official_value": 7.51113888415304,
+      "application_value": 9.4,
+      "difference": 1.8889,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.51113888415304) and DB (9.4)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "IRL",
+      "period": 2021,
+      "official_value": 16.2581881158197,
+      "application_value": 15.1,
+      "difference": 1.1582,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (16.2581881158197) and DB (15.1)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "IRL",
+      "period": 2020,
+      "official_value": 7.15369505735335,
+      "application_value": 6.6,
+      "difference": 0.5537,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.15369505735335) and DB (6.6)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ITA",
+      "period": 2024,
+      "official_value": 0.783039135276795,
+      "application_value": 2.23,
+      "difference": 1.447,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.783039135276795) and DB (2.23)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ITA",
+      "period": 2023,
+      "official_value": 0.922796543670316,
+      "application_value": 2.15,
+      "difference": 1.2272,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.922796543670316) and DB (2.15)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ITA",
+      "period": 2022,
+      "official_value": 4.82117669913565,
+      "application_value": 1.72,
+      "difference": 3.1012,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (4.82117669913565) and DB (1.72)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ITA",
+      "period": 2021,
+      "official_value": 8.93106210800055,
+      "application_value": 6.59,
+      "difference": 2.3411,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.93106210800055) and DB (6.59)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "ITA",
+      "period": 2020,
+      "official_value": -8.86822122185345,
+      "application_value": -5.52,
+      "difference": 3.3482,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-8.86822122185345) and DB (-5.52)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "NLD",
+      "period": 2023,
+      "official_value": -0.598061017580278,
+      "application_value": 1.3,
+      "difference": 1.8981,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-0.598061017580278) and DB (1.3)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "NLD",
+      "period": 2022,
+      "official_value": 5.00723453395074,
+      "application_value": 0.87,
+      "difference": 4.1372,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.00723453395074) and DB (0.87)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "NLD",
+      "period": 2021,
+      "official_value": 6.27683593745216,
+      "application_value": 5.74,
+      "difference": 0.5368,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.27683593745216) and DB (5.74)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "NLD",
+      "period": 2020,
+      "official_value": -3.86799714191608,
+      "application_value": -6.37,
+      "difference": 2.502,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-3.86799714191608) and DB (-6.37)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "SWE",
+      "period": 2023,
+      "official_value": -0.204061304891439,
+      "application_value": 0.85,
+      "difference": 1.0541,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-0.204061304891439) and DB (0.85)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "SWE",
+      "period": 2021,
+      "official_value": 5.2258643028773,
+      "application_value": 6.56,
+      "difference": 1.3341,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.2258643028773) and DB (6.56)."
+    },
+    {
+      "indicator": "GDP_REAL_GROWTH",
+      "country": "SWE",
+      "period": 2020,
+      "official_value": -1.93379704032216,
+      "application_value": -4.37,
+      "difference": 2.4362,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-1.93379704032216) and DB (-4.37)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "DNK",
+      "period": 2021,
+      "official_value": 5.065,
+      "application_value": 3.71,
+      "difference": 1.355,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.065) and DB (3.71)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "DNK",
+      "period": 2020,
+      "official_value": 5.644,
+      "application_value": 3.37,
+      "difference": 2.274,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.644) and DB (3.37)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ESP",
+      "period": 2022,
+      "official_value": 13.033,
+      "application_value": 12.5,
+      "difference": 0.533,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (13.033) and DB (12.5)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ESP",
+      "period": 2020,
+      "official_value": 15.532,
+      "application_value": 13.5,
+      "difference": 2.032,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (15.532) and DB (13.5)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "FRA",
+      "period": 2024,
+      "official_value": 7.4,
+      "application_value": 6.26,
+      "difference": 1.14,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.4) and DB (6.26)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "FRA",
+      "period": 2023,
+      "official_value": 7.335,
+      "application_value": 5.81,
+      "difference": 1.525,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.335) and DB (5.81)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "FRA",
+      "period": 2022,
+      "official_value": 7.303,
+      "application_value": 5.61,
+      "difference": 1.693,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.303) and DB (5.61)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "FRA",
+      "period": 2021,
+      "official_value": 7.871,
+      "application_value": 5.69,
+      "difference": 2.181,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.871) and DB (5.69)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "FRA",
+      "period": 2020,
+      "official_value": 8.009,
+      "application_value": 6.04,
+      "difference": 1.969,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.009) and DB (6.04)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "GRC",
+      "period": 2022,
+      "official_value": 12.426,
+      "application_value": 11.6,
+      "difference": 0.826,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (12.426) and DB (11.6)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "GRC",
+      "period": 2020,
+      "official_value": 15.899,
+      "application_value": 13.2,
+      "difference": 2.699,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (15.899) and DB (13.2)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "IRL",
+      "period": 2024,
+      "official_value": 4.3,
+      "application_value": 3.16,
+      "difference": 1.14,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (4.3) and DB (3.16)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "IRL",
+      "period": 2023,
+      "official_value": 4.243,
+      "application_value": 2.71,
+      "difference": 1.533,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (4.243) and DB (2.71)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "IRL",
+      "period": 2022,
+      "official_value": 4.465,
+      "application_value": 2.51,
+      "difference": 1.955,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (4.465) and DB (2.51)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "IRL",
+      "period": 2021,
+      "official_value": 6.357,
+      "application_value": 2.59,
+      "difference": 3.767,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.357) and DB (2.59)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "IRL",
+      "period": 2020,
+      "official_value": 5.623,
+      "application_value": 2.94,
+      "difference": 2.683,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.623) and DB (2.94)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ITA",
+      "period": 2024,
+      "official_value": 6.5,
+      "application_value": 7.36,
+      "difference": 0.86,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.5) and DB (7.36)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ITA",
+      "period": 2023,
+      "official_value": 7.627,
+      "application_value": 6.65,
+      "difference": 0.977,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.627) and DB (6.65)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ITA",
+      "period": 2022,
+      "official_value": 8.069,
+      "application_value": 5.96,
+      "difference": 2.109,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.069) and DB (5.96)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ITA",
+      "period": 2021,
+      "official_value": 9.497,
+      "application_value": 5.41,
+      "difference": 4.087,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (9.497) and DB (5.41)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "ITA",
+      "period": 2020,
+      "official_value": 9.192,
+      "application_value": 5.07,
+      "difference": 4.122,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (9.192) and DB (5.07)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "NLD",
+      "period": 2024,
+      "official_value": 3.7,
+      "application_value": 5.34,
+      "difference": 1.64,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.7) and DB (5.34)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "NLD",
+      "period": 2023,
+      "official_value": 3.535,
+      "application_value": 5.03,
+      "difference": 1.495,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.535) and DB (5.03)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "NLD",
+      "period": 2022,
+      "official_value": 3.526,
+      "application_value": 4.49,
+      "difference": 0.964,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.526) and DB (4.49)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "NLD",
+      "period": 2020,
+      "official_value": 3.82,
+      "application_value": 3.1,
+      "difference": 0.72,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.82) and DB (3.1)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "POL",
+      "period": 2024,
+      "official_value": 2.807,
+      "application_value": 4.64,
+      "difference": 1.833,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.807) and DB (4.64)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "POL",
+      "period": 2023,
+      "official_value": 2.743,
+      "application_value": 4.33,
+      "difference": 1.587,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.743) and DB (4.33)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "POL",
+      "period": 2022,
+      "official_value": 2.811,
+      "application_value": 3.79,
+      "difference": 0.979,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.811) and DB (3.79)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "POL",
+      "period": 2020,
+      "official_value": 3.155,
+      "application_value": 2.4,
+      "difference": 0.755,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.155) and DB (2.4)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "SWE",
+      "period": 2024,
+      "official_value": 8.4,
+      "application_value": 9.44,
+      "difference": 1.04,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.4) and DB (9.44)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "SWE",
+      "period": 2023,
+      "official_value": 7.611,
+      "application_value": 9.13,
+      "difference": 1.519,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.611) and DB (9.13)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "SWE",
+      "period": 2022,
+      "official_value": 7.417,
+      "application_value": 8.59,
+      "difference": 1.173,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.417) and DB (8.59)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "SWE",
+      "period": 2021,
+      "official_value": 8.803,
+      "application_value": 7.91,
+      "difference": 0.893,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.803) and DB (7.91)."
+    },
+    {
+      "indicator": "UNEMP_RATE",
+      "country": "SWE",
+      "period": 2020,
+      "official_value": 8.291,
+      "application_value": 7.2,
+      "difference": 1.091,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.291) and DB (7.2)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DEU",
+      "period": 2023,
+      "official_value": 5.94643667725823,
+      "application_value": 8.6,
+      "difference": 2.6536,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.94643667725823) and DB (8.6)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DEU",
+      "period": 2022,
+      "official_value": 6.87257438551096,
+      "application_value": 11.5,
+      "difference": 4.6274,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.87257438551096) and DB (11.5)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DEU",
+      "period": 2021,
+      "official_value": 3.06666666666673,
+      "application_value": 5.6,
+      "difference": 2.5333,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.06666666666673) and DB (5.6)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DEU",
+      "period": 2020,
+      "official_value": 0.144877925813981,
+      "application_value": 2.15,
+      "difference": 2.0051,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.144877925813981) and DB (2.15)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DNK",
+      "period": 2024,
+      "official_value": 1.37986244415555,
+      "application_value": 2.15,
+      "difference": 0.7701,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.37986244415555) and DB (2.15)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DNK",
+      "period": 2023,
+      "official_value": 3.31178243972716,
+      "application_value": 7.2,
+      "difference": 3.8882,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.31178243972716) and DB (7.2)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DNK",
+      "period": 2022,
+      "official_value": 7.70063309931329,
+      "application_value": 10.1,
+      "difference": 2.3994,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.70063309931329) and DB (10.1)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "DNK",
+      "period": 2021,
+      "official_value": 1.83962310160841,
+      "application_value": 4.2,
+      "difference": 2.3604,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.83962310160841) and DB (4.2)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ESP",
+      "period": 2023,
+      "official_value": 3.53247287667898,
+      "application_value": 9.0,
+      "difference": 5.4675,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.53247287667898) and DB (9.0)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ESP",
+      "period": 2022,
+      "official_value": 8.39041940748896,
+      "application_value": 11.9,
+      "difference": 3.5096,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.39041940748896) and DB (11.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ESP",
+      "period": 2021,
+      "official_value": 3.09304989531805,
+      "application_value": 6.0,
+      "difference": 2.907,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.09304989531805) and DB (6.0)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ESP",
+      "period": 2020,
+      "official_value": -0.322564616861942,
+      "application_value": 2.55,
+      "difference": 2.8726,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-0.322564616861942) and DB (2.55)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "FRA",
+      "period": 2024,
+      "official_value": 1.99742599742599,
+      "application_value": 3.11,
+      "difference": 1.1126,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.99742599742599) and DB (3.11)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "FRA",
+      "period": 2023,
+      "official_value": 4.88000215969119,
+      "application_value": 8.9,
+      "difference": 4.02,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (4.88000215969119) and DB (8.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "FRA",
+      "period": 2022,
+      "official_value": 5.22294079215231,
+      "application_value": 11.8,
+      "difference": 6.5771,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.22294079215231) and DB (11.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "FRA",
+      "period": 2021,
+      "official_value": 1.64090620368408,
+      "application_value": 5.9,
+      "difference": 4.2591,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.64090620368408) and DB (5.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "FRA",
+      "period": 2020,
+      "official_value": 0.477700847097022,
+      "application_value": 1.72,
+      "difference": 1.2423,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.477700847097022) and DB (1.72)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "GRC",
+      "period": 2024,
+      "official_value": 2.74197509290368,
+      "application_value": 3.85,
+      "difference": 1.108,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.74197509290368) and DB (3.85)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "GRC",
+      "period": 2023,
+      "official_value": 3.46456960141384,
+      "application_value": 9.8,
+      "difference": 6.3354,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.46456960141384) and DB (9.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "GRC",
+      "period": 2022,
+      "official_value": 9.64486176520366,
+      "application_value": 12.7,
+      "difference": 3.0551,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (9.64486176520366) and DB (12.7)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "GRC",
+      "period": 2021,
+      "official_value": 1.22394673806362,
+      "application_value": 6.8,
+      "difference": 5.5761,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.22394673806362) and DB (6.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "GRC",
+      "period": 2020,
+      "official_value": -1.24746757345197,
+      "application_value": 2.14,
+      "difference": 3.3875,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-1.24746757345197) and DB (2.14)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "IRL",
+      "period": 2023,
+      "official_value": 6.29942487419124,
+      "application_value": 7.1,
+      "difference": 0.8006,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (6.29942487419124) and DB (7.1)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "IRL",
+      "period": 2022,
+      "official_value": 7.82945736434104,
+      "application_value": 10.0,
+      "difference": 2.1705,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (7.82945736434104) and DB (10.0)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "IRL",
+      "period": 2021,
+      "official_value": 2.34034113447043,
+      "application_value": 4.1,
+      "difference": 1.7597,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.34034113447043) and DB (4.1)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "IRL",
+      "period": 2020,
+      "official_value": -0.326183651280032,
+      "application_value": 0.82,
+      "difference": 1.1462,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (-0.326183651280032) and DB (0.82)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ITA",
+      "period": 2024,
+      "official_value": 0.982375111637719,
+      "application_value": 1.95,
+      "difference": 0.9676,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.982375111637719) and DB (1.95)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ITA",
+      "period": 2023,
+      "official_value": 5.62219292216457,
+      "application_value": 7.9,
+      "difference": 2.2778,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.62219292216457) and DB (7.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ITA",
+      "period": 2022,
+      "official_value": 8.20128981173605,
+      "application_value": 10.8,
+      "difference": 2.5987,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.20128981173605) and DB (10.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "ITA",
+      "period": 2021,
+      "official_value": 1.87378306224529,
+      "application_value": 4.9,
+      "difference": 3.0262,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.87378306224529) and DB (4.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "NLD",
+      "period": 2024,
+      "official_value": 3.34639895475025,
+      "application_value": 2.8,
+      "difference": 0.5464,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.34639895475025) and DB (2.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "NLD",
+      "period": 2023,
+      "official_value": 3.84231997489532,
+      "application_value": 7.9,
+      "difference": 4.0577,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (3.84231997489532) and DB (7.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "NLD",
+      "period": 2022,
+      "official_value": 9.99817255172687,
+      "application_value": 10.8,
+      "difference": 0.8018,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (9.99817255172687) and DB (10.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "NLD",
+      "period": 2021,
+      "official_value": 2.68123345078501,
+      "application_value": 4.9,
+      "difference": 2.2188,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.68123345078501) and DB (4.9)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "NLD",
+      "period": 2020,
+      "official_value": 1.26788070731057,
+      "application_value": 2.35,
+      "difference": 1.0821,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (1.26788070731057) and DB (2.35)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "POL",
+      "period": 2023,
+      "official_value": 11.5289127961104,
+      "application_value": 9.8,
+      "difference": 1.7289,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (11.5289127961104) and DB (9.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "POL",
+      "period": 2022,
+      "official_value": 14.4294507575757,
+      "application_value": 12.7,
+      "difference": 1.7295,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (14.4294507575757) and DB (12.7)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "POL",
+      "period": 2021,
+      "official_value": 5.05502704719272,
+      "application_value": 6.8,
+      "difference": 1.745,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5.05502704719272) and DB (6.8)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "SWE",
+      "period": 2024,
+      "official_value": 2.83679582836375,
+      "application_value": 2.1,
+      "difference": 0.7368,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.83679582836375) and DB (2.1)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "SWE",
+      "period": 2023,
+      "official_value": 8.54678338363812,
+      "application_value": 7.2,
+      "difference": 1.3468,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.54678338363812) and DB (7.2)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "SWE",
+      "period": 2022,
+      "official_value": 8.36888341476543,
+      "application_value": 10.1,
+      "difference": 1.7311,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (8.36888341476543) and DB (10.1)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "SWE",
+      "period": 2021,
+      "official_value": 2.16416666666663,
+      "application_value": 4.2,
+      "difference": 2.0358,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (2.16416666666663) and DB (4.2)."
+    },
+    {
+      "indicator": "HICP_INFLATION",
+      "country": "SWE",
+      "period": 2020,
+      "official_value": 0.498304091118424,
+      "application_value": 1.65,
+      "difference": 1.1517,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (0.498304091118424) and DB (1.65)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "DNK",
+      "period": 2024,
+      "official_value": 5976992,
+      "application_value": 5000000.0,
+      "difference": 976992.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5976992) and DB (5000000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "DNK",
+      "period": 2023,
+      "official_value": 5946952,
+      "application_value": 4990000.0,
+      "difference": 956952.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5946952) and DB (4990000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "DNK",
+      "period": 2022,
+      "official_value": 5903037,
+      "application_value": 4980000.0,
+      "difference": 923037.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5903037) and DB (4980000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "DNK",
+      "period": 2021,
+      "official_value": 5856733,
+      "application_value": 4970000.0,
+      "difference": 886733.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5856733) and DB (4970000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "DNK",
+      "period": 2020,
+      "official_value": 5831404,
+      "application_value": 4960000.0,
+      "difference": 871404.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5831404) and DB (4960000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "ESP",
+      "period": 2024,
+      "official_value": 48848840,
+      "application_value": 47500000.0,
+      "difference": 1348840.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (48848840) and DB (47500000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "GRC",
+      "period": 2021,
+      "official_value": 10570130,
+      "application_value": 10337600.0,
+      "difference": 232530.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10570130) and DB (10337600.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "GRC",
+      "period": 2020,
+      "official_value": 10698599,
+      "application_value": 10316800.0,
+      "difference": 381799.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10698599) and DB (10316800.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "IRL",
+      "period": 2024,
+      "official_value": 5395790,
+      "application_value": 5000000.0,
+      "difference": 395790.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5395790) and DB (5000000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "IRL",
+      "period": 2023,
+      "official_value": 5311538,
+      "application_value": 4990000.0,
+      "difference": 321538.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5311538) and DB (4990000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "IRL",
+      "period": 2022,
+      "official_value": 5212836,
+      "application_value": 4980000.0,
+      "difference": 232836.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5212836) and DB (4980000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "IRL",
+      "period": 2021,
+      "official_value": 5110585,
+      "application_value": 4970000.0,
+      "difference": 140585.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (5110585) and DB (4970000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "POL",
+      "period": 2020,
+      "official_value": 37515748,
+      "application_value": 36406400.0,
+      "difference": 1109348.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (37515748) and DB (36406400.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "SWE",
+      "period": 2024,
+      "official_value": 10569709,
+      "application_value": 5000000.0,
+      "difference": 5569709.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10569709) and DB (5000000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "SWE",
+      "period": 2023,
+      "official_value": 10536632,
+      "application_value": 4990000.0,
+      "difference": 5546632.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10536632) and DB (4990000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "SWE",
+      "period": 2022,
+      "official_value": 10486941,
+      "application_value": 4980000.0,
+      "difference": 5506941.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10486941) and DB (4980000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "SWE",
+      "period": 2021,
+      "official_value": 10415811,
+      "application_value": 4970000.0,
+      "difference": 5445811.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10415811) and DB (4970000.0)."
+    },
+    {
+      "indicator": "POPULATION",
+      "country": "SWE",
+      "period": 2020,
+      "official_value": 10353442,
+      "application_value": 4960000.0,
+      "difference": 5393442.0,
+      "severity": "MEDIUM",
+      "explanation": "Minor rounding/source revision difference between World Bank (10353442) and DB (4960000.0)."
+    }
+  ]
+}

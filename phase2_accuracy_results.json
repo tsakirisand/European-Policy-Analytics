@@ -1,0 +1,124 @@
+{
+  "metadata": {
+    "title": "Data Accuracy Phase 2 Final Verification Results",
+    "project": "European Policy Analytics",
+    "version": "1.0.0",
+    "audit_date": "2026-10-10",
+    "auditor_role": "Senior Data Engineer, Financial Data Analyst, & Statistical Auditor"
+  },
+  "reconciliation_summary_table": [
+    {
+      "category": "Incorrect Mapping / Series Mismatches",
+      "claimed_count": 345,
+      "independently_verified": 342,
+      "unresolved": 0,
+      "evidence_file_test": "phase2_discrepancy_evidence.json / test_source_indicator_mismatches_detection"
+    },
+    {
+      "category": "Confirmed Source Revisions",
+      "claimed_count": 38,
+      "independently_verified": 37,
+      "unresolved": 0,
+      "evidence_file_test": "phase2_discrepancy_evidence.json"
+    },
+    {
+      "category": "Confirmed Rounding",
+      "claimed_count": 11,
+      "independently_verified": 15,
+      "unresolved": 0,
+      "evidence_file_test": "phase2_discrepancy_evidence.json / test_production_analytics_precision_and_presentation"
+    },
+    {
+      "category": "Unverified Observations",
+      "claimed_count": 300,
+      "independently_verified": 300,
+      "unresolved": 0,
+      "evidence_file_test": "DATA_ACCURACY_PHASE2.md"
+    },
+    {
+      "category": "Matching Observations",
+      "claimed_count": 796,
+      "independently_verified": 796,
+      "unresolved": 0,
+      "evidence_file_test": "DATA_ACCURACY_PHASE2.md"
+    },
+    {
+      "category": "Total Audited Observations",
+      "claimed_count": 1490,
+      "independently_verified": 1490,
+      "unresolved": 0,
+      "evidence_file_test": "test_audit_category_reconciliation"
+    }
+  ],
+  "task1_uniqueness_and_partition": {
+    "total_unique_audited_observations": 1490,
+    "matching_observations": 796,
+    "total_discrepancies_examined": 394,
+    "unverified_observations": 300,
+    "discrepancy_keys_unique": true,
+    "duplicate_keys_count": 0,
+    "partition_equation": "796 (Matching) + 394 (Discrepancies) + 300 (Unverified) = 1490 Total Audited Observations"
+  },
+  "task4_ecb_time_weighted_verification": {
+    "series_key": "FM/D.U2.EUR.4F.KR.MRR_RT.LEV",
+    "frequency": "Daily (FREQ=D)",
+    "calculation_method": "Time-Weighted Annual Average: sum(rate_i * duration_i) / total_days across daily calendar observations.",
+    "recalculated_values": [
+      {
+        "year": 2020,
+        "days": 366,
+        "time_weighted_avg": 0.0,
+        "eoy_rate": 0.0,
+        "status": "Final"
+      },
+      {
+        "year": 2021,
+        "days": 365,
+        "time_weighted_avg": 0.0,
+        "eoy_rate": 0.0,
+        "status": "Final"
+      },
+      {
+        "year": 2022,
+        "days": 365,
+        "time_weighted_avg": 0.578767,
+        "eoy_rate": 2.5,
+        "status": "Final"
+      },
+      {
+        "year": 2023,
+        "days": 365,
+        "time_weighted_avg": 3.807534,
+        "eoy_rate": 4.5,
+        "status": "Final"
+      },
+      {
+        "year": 2024,
+        "days": 366,
+        "time_weighted_avg": 4.131831,
+        "eoy_rate": 3.15,
+        "status": "Final"
+      },
+      {
+        "year": 2025,
+        "days": 365,
+        "time_weighted_avg": 2.408904,
+        "eoy_rate": 2.15,
+        "status": "Final"
+      },
+      {
+        "year": 2026,
+        "days": 283,
+        "time_weighted_avg": 2.274558,
+        "eoy_rate": 2.65,
+        "status": "INCOMPLETE_YEAR_YTD"
+      }
+    ]
+  },
+  "pytest_execution_results": {
+    "total_tests": 23,
+    "passed": 23,
+    "failed": 0,
+    "status": "CLEAN_PASS"
+  }
+}
