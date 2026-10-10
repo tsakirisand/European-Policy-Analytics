@@ -7,8 +7,7 @@ Built strictly with **REAL official APIs** from **Eurostat**, the **European Cen
 ---
 
 ## 🚀 Live Demo & Repository
-- 🔗 **GitHub Repository:** [https://github.com/tsakirisand/European-Policy-Analytics](https://github.com/tsakirisand/European-Policy-Analytics)
-- 🖥️ **Local Dashboard Application:** `http://localhost:8502`
+- 🔗 **Public Application URL:** [https://european-policy-analytics.streamlit.app](https://european-policy-analytics.streamlit.app)
 
 ---
 
