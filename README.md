@@ -1,188 +1,268 @@
 # 🇪🇺 European Policy Analytics
 
-A professional, real-data European economic, social, financial, demographic, and environmental policy research platform.
+A production-grade, European-first **Data Engineering & Macroeconomic Analytics Platform** designed to ingest, validate, model, analyze, and visualize macroeconomic indicators, labor statistics, fiscal debt/deficit balances, energy & environmental metrics, monetary policy rates, and living standards across **31+ European economies**.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![Python](https://img.shields.io/badge/python-3.14-blue.svg)
-![Framework](https://img.shields.io/badge/framework-Streamlit%20%7C%20Plotly-green.svg)
-![Data Integrity](https://img.shields.io/badge/data_integrity-100%25_Official-brightgreen.svg)
+Built strictly with **REAL official APIs** from **Eurostat**, the **European Central Bank (ECB)**, and the **World Bank (API v2)**, the platform provides an interactive 8-page Streamlit analytical dashboard backed by an automated validation engine and relational database holding **12,541+ verified statistical observations**.
 
 ---
 
-## 🌟 Executive Summary
-
-**European Policy Analytics** collects, processes, normalizes, validates, analyzes, and visualizes official economic, social, fiscal, demographic, and environmental statistics across 31 European countries (all 27 EU member states plus United Kingdom, Switzerland, Norway, and Iceland) and EU-wide aggregates.
-
-Built as an analytical research product, the platform prioritizes **data quality**, **mathematical rigor**, **provenance transparency**, and **professional visual aesthetics**.
-
-> [!IMPORTANT]
-> **Data Integrity Guarantee:** This platform uses **100% factual official statistics** from official API connectors (Eurostat, ECB, World Bank, OECD). It contains zero fabricated values and zero simulated policy calculators in V1.
+## 🚀 Live Demo & Repository
+- 🔗 **GitHub Repository:** [https://github.com/tsakirisand/European-Policy-Analytics](https://github.com/tsakirisand/European-Policy-Analytics)
+- 🖥️ **Local Dashboard Application:** `http://localhost:8502`
 
 ---
 
-## 🏛️ Analytical Policy Domains (8 Domains)
+## 🌟 Key Highlights & Engineering Features
 
-1. **Economy (ECON):** Real GDP growth, GDP per capita, HICP consumer price inflation, industrial output.
-2. **Labour & Income (LABOUR):** Total unemployment rate, youth unemployment rate, GDP per capita (USD).
-3. **Purchasing Power & Living Standards (PPP):** GDP per capita in Purchasing Power Standards (PPS, EU27=100).
-4. **Public Finances (FINANCE_PUB):** General government gross debt (% GDP), fiscal deficit/surplus balance (% GDP).
-5. **Financial Conditions (FINANCE_MON):** ECB main refinancing policy interest rate, bank mortgage lending rates.
-6. **Energy & Environment (ENERGY_ENV):** Share of renewable energy in gross final energy consumption (%), greenhouse gas emissions.
-7. **Demographics & Social Conditions (DEMO_SOCIAL):** Total population, at-risk-of-poverty or social exclusion rate (AROPE), life expectancy.
-8. **Trade & Industry (TRADE_IND):** International trade balance in goods (% GDP), net exports.
+- **🇪🇺 European-First Analytics**: Comprehensive cross-country comparison across all 27 EU member states, 4 EFTA/non-EU European economies (United Kingdom, Switzerland, Norway, Iceland), and key regional aggregates (`EU27`, `EA20`) categorized into official Eurostat regional groupings (*Western, Southern, Northern, Eastern, Central Europe*).
+- **📡 Pure Official API Ingestion**: Direct integration with Eurostat REST API (`nama_10_gdp`, `nama_10_pc`, `prc_hicp_aind`, `une_rt_a`, `gov_10dd_edpt1`, `demo_gind`, `nrg_ind_ren`, `env_air_gge`, `ilc_peps01n`), ECB SDMX REST API (`FM/D.U2.EUR.4F.KR.MRR_RT.LEV`, `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N`), and World Bank API v2 (`NY.GDP.PCAP.CD`, `NE.RSB.GNFS.ZS`, `SP.DYN.LE00.IN`). Zero hardcoded economic values or third-party placeholder datasets.
+- **⭐ Relational Database Architecture**: Relational schema featuring `countries`, `indicators`, `observations`, `ingestion_logs`, and `validation_logs` enforcing unique constraints (`country_code`, `indicator_id`, `period`) and preserving full IEEE 754 float64 precision.
+- **🛡️ Automated Data Quality Engine**: Rule-based validation storing audit status logs (`PASS`, `FAIL`, `WARNING`, `UNVERIFIED`) covering primary key integrity, deduplication, outlier detection, and time-weighted annual average calculations for monetary policy rates.
+- **📊 8-Page Streamlit Dashboard**: Analytical policy dashboard offering macro overview, single-country explorer, side-by-side comparative engine, indicator inventory, European rankings, cross-indicator correlation/scatter engines with OLS trendlines, data quality portal, and methodology documentation.
 
 ---
 
-## 💻 Application Pages (8 Pages)
+## 🏗️ System Architecture
 
-The platform features a clean navigation system with 8 dedicated analytical pages:
+```mermaid
+flowchart TD
+    subgraph Data Sources
+        A[Eurostat REST API\nGDP, HICP, Unemployment, Debt, Population]
+        B[ECB SDMX REST API\nPolicy Rates & Mortgage Interest Rates]
+        C[World Bank API v2\nGDP per Capita USD, Trade Balance, Life Expectancy]
+    end
 
-1. **📊 Executive Overview:** Concise macro-economic dashboard displaying headline European metrics, multi-country trend lines, and interactive European geographic maps.
-2. **🏛️ European Country Explorer:** Comprehensive profile for any selected European country across all 8 policy domains with historical trend breakdowns vs. EU-27 averages.
-3. **⚖️ Country Comparison:** Side-by-side comparative engine allowing users to select custom country groups, time horizons, and indicators with snapshot bar charts and CSV data exports.
-4. **📖 Indicator Explorer & Catalog:** Searchable inventory of integrated indicators detailing dataset codes, provider sources, units, frequencies, and direct links to official data portals.
-5. **🏆 European Rankings:** Ranks European economies by indicator performance for any chosen year, respecting directionality (e.g. low unemployment is top performance) and disclosing missing observations.
-6. **🔬 Trends & Indicator Relationships:** Cross-indicator scatter plot engine with OLS linear trendlines, Pearson correlation coefficients ($r$), $R^2$, $p$-values, and correlation vs. causation disclaimers.
-7. **🛡️ Data Quality & Official Sources Portal:** Complete data provenance dashboard showing database health, validation logs, data freshness, and an interactive **Live API Ingestion Engine** trigger.
-8. **📐 Methodology & Analytical Standards:** Transparent guide documenting percentage vs. percentage-point change formulas, CAGR calculations, ISO country normalization, and derived EU aggregate rules.
+    subgraph Data Engineering Pipeline
+        D[API Connectors\neurostat.py, ecb.py, worldbank.py]
+        E[Validation & Normalization Engine\nnormalizer.py & validator.py]
+        F[Audit & Quality Logger\nvalidation_logs]
+    end
 
----
+    subgraph Database Storage
+        G[(SQLite / PostgreSQL\npolicy_analytics.db)]
+        G --> H[countries]
+        G --> I[indicators]
+        G --> J[observations]
+        G --> K[ingestion_logs]
+    end
 
-## 🛰️ Integrated Official Data Sources & Datasets
+    subgraph Analytics & Visualization
+        L[Analytical Calculation Engine\ncalculations.py & query engine]
+        M[Multi-Page Streamlit App\n8 Policy Modules]
+    end
 
-| Source Provider | Official Dataset Identifier | Indicator Description | Frequency |
-| :--- | :--- | :--- | :--- |
-| **Eurostat** | `nama_10_gdp` | Real GDP Growth & Components | Annual |
-| **Eurostat** | `nama_10_pc` | GDP per Capita in PPS (EU27=100) | Annual |
-| **Eurostat** | `prc_hicp_aind` | HICP Harmonised Consumer Inflation | Annual |
-| **Eurostat** | `une_rt_a` | Total & Youth Unemployment Rate | Annual |
-| **Eurostat** | `gov_10dd_edpt1` | Government Debt & Deficit (% GDP) | Annual |
-| **Eurostat** | `nrg_ind_ren` | Renewable Energy Share (%) | Annual |
-| **Eurostat** | `env_air_gge` | Greenhouse Gas Emissions (k tonnes) | Annual |
-| **Eurostat** | `ilc_peps01n` | At-risk-of-poverty or social exclusion | Annual |
-| **Eurostat** | `demo_gind` | Total Population on 1st January | Annual |
-| **European Central Bank (ECB)** | `FM/D.U2.EUR.4F.KR.MRR_RT.LEV` | ECB Main Refinancing Policy Interest Rate | Annual avg (Time-Weighted) |
-| **European Central Bank (ECB)** | `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N` | Bank Mortgage Lending Interest Rates | Annual avg |
-| **World Bank API v2** | `NY.GDP.PCAP.CD` | Gross Domestic Product per Capita (Current USD) | Annual |
-| **World Bank API v2** | `NE.RSB.GNFS.ZS` | Trade Balance in Goods & Services (% GDP) | Annual |
-| **World Bank API v2** | `SP.DYN.LE00.IN` | Life Expectancy at Birth (years) | Annual |
-
----
-
-## 📐 Mathematical Calculations & Integrity
-
-### Percentage Change vs. Percentage-Point Change
-- **Percentage Change ($\%$):** Used for level indicators ($V_t$):
-  $$\text{Pct Change} = \left( \frac{V_t - V_{t-1}}{|V_{t-1}|} \right) \times 100\%$$
-  *Zero Denominators:* Evaluated safely to prevent division-by-zero or infinite artifacts.
-
-- **Percentage-Point Change ($\text{pp}$):** Used for rate indicators already expressed as percentages (unemployment rate, inflation rate, debt % GDP):
-  $$\text{Pct Point Change} = V_t - V_{t-1}$$
-
-### Compound Annual Growth Rate (CAGR)
-$$\text{CAGR} = \left( \frac{V_{\text{end}}}{V_{\text{start}}} \right)^{\frac{1}{n}} - 1$$
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    E -->|PASS / Valid| G
+    E -->|Audit Logs| F
+    G --> L
+    L --> M
+```
 
 ---
 
-## 🛠️ Project Architecture
+## 📊 Database Schema Architecture
+
+```
+               +------------------+
+               |    countries     |
+               +------------------+
+               | code_iso3 (PK)   |
+               | code_iso2        |
+               | code_eurostat    |
+               | name             |
+               | region           |
+               | is_eu            |
+               +--------+---------+
+                        |
+                        | 1:N
+               +--------v---------+
+               |   observations   |
+               +------------------+
+               | id (PK)          |
+               | country_code (FK)|
+               | indicator_id (FK)|
+               | period           |
+               | value            |
+               | unit             |
+               | dataset_code     |
+               | validation_note  |
+               +--------+---------+
+                        |
+                        | N:1
+               +--------v---------+
+               |    indicators    |
+               +------------------+
+               | id (PK)          |
+               | domain_id        |
+               | name             |
+               | short_name       |
+               | unit             |
+               | source_provider  |
+               | dataset_code     |
+               +------------------+
+```
+
+---
+
+## 📡 Official Series Catalog Matrix
+
+Every metric is fully traceable to its official source dataset and series key:
+
+| Domain | Indicator ID | Official Dataset Code | Source Provider | Frequency | Unit |
+|---|---|---|---|---|---|
+| Economy | `GDP_REAL_GROWTH` | `nama_10_gdp` | Eurostat | Annual | % Change (CLV) |
+| Purchasing Power | `GDP_PC_PPP` | `nama_10_pc` | Eurostat | Annual | PPS Index (EU27=100) |
+| Economy | `HICP_INFLATION` | `prc_hicp_aind` | Eurostat | Annual | Annual % Rate |
+| Labour & Income | `UNEMP_RATE` | `une_rt_a` | Eurostat | Annual | % of Labor Force |
+| Labour & Income | `YOUTH_UNEMP_RATE` | `une_rt_a` | Eurostat | Annual | % of Youth Force |
+| Public Finance | `GOV_DEBT_GDP` | `gov_10dd_edpt1` | Eurostat | Annual | % of GDP |
+| Public Finance | `GOV_DEFICIT_GDP` | `gov_10dd_edpt1` | Eurostat | Annual | % of GDP |
+| Demographics | `POPULATION` | `demo_gind` | Eurostat | Annual | Persons (1st Jan) |
+| Energy & Env | `RENEWABLE_ENERGY_SHARE` | `nrg_ind_ren` | Eurostat | Annual | % of Consumption |
+| Energy & Env | `GHG_EMISSIONS` | `env_air_gge` | Eurostat | Annual | k tonnes CO2eq |
+| Demographics | `POVERTY_RISK_RATE` | `ilc_peps01n` | Eurostat | Annual | % of Population |
+| Monetary Policy | `ECB_POLICY_RATE` | `FM/D.U2.EUR.4F.KR.MRR_RT.LEV` | ECB Data API | Daily (Time-Weighted) | % p.a. |
+| Financial Mon | `HOUSEHOLD_LENDING_RATE` | `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N` | ECB Data API | Monthly (Annual Avg) | % p.a. |
+| Labour & Income | `AVG_ANNUAL_WAGE` | `NY.GDP.PCAP.CD` | World Bank API | Annual | Current USD ($) |
+| Trade & Industry| `TRADE_BALANCE_GDP` | `NE.RSB.GNFS.ZS` | World Bank API | Annual | % of GDP |
+| Demographics | `LIFE_EXPECTANCY` | `SP.DYN.LE00.IN` | World Bank API | Annual | Mean Years |
+
+---
+
+## 🖥️ Streamlit Dashboard Modules
+
+The interactive Streamlit application contains **8 specialized page modules**:
+
+1. **📊 Executive Overview**: European snapshot dashboard displaying headline macro metrics, cross-country trend lines, and interactive Plotly geographic maps.
+2. **🏛️ European Country Explorer**: Deep-dive profile for any selected European country across all 8 policy domains with historical trend breakdowns vs. EU-27 averages.
+3. **⚖️ Country Comparison**: Side-by-side comparative engine allowing users to select custom country groups, time horizons, and indicators with snapshot bar charts and CSV data exports.
+4. **📖 Indicator Explorer & Catalog**: Searchable inventory of integrated indicators detailing dataset codes, provider sources, units, frequencies, and direct links to official data portals.
+5. **🏆 European Rankings**: Ranks European economies by indicator performance for any chosen year, respecting directionality (e.g. low unemployment is top performance) and disclosing missing observations.
+6. **🔬 Trends & Indicator Relationships**: Cross-indicator scatter plot engine with OLS linear trendlines, Pearson correlation coefficients ($r$), $R^2$, $p$-values, and correlation disclaimers.
+7. **🛡️ Data Quality & Official Sources Portal**: Complete data provenance dashboard showing database health, validation logs, data freshness, and interactive live API re-ingestion triggers.
+8. **📐 Methodology & Analytical Standards**: Transparent guide documenting percentage vs. percentage-point change formulas, CAGR calculations, ISO country normalization, and derived EU aggregate rules.
+
+---
+
+## 🚀 Quickstart & Reproducibility
+
+### Local Setup
+
+```bash
+# 1. Clone workspace
+git clone https://github.com/tsakirisand/European-Policy-Analytics.git
+cd European-Policy-Analytics
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run live data ingestion pipeline (Retrieves Eurostat, ECB, World Bank APIs)
+python3 -c "from src.pipeline.ingestion import run_ingestion_pipeline; run_ingestion_pipeline()"
+
+# 4. Launch Streamlit Dashboard
+streamlit run app.py
+```
+
+---
+
+## 🧪 Automated Testing
+
+Run the automated pytest test suite covering API parsing, normalizer rules, validator bounds, ECB time-weighted duration calculations, precision preservation, and source attribution:
+
+```bash
+PYTHONPATH=. python3 -m pytest -v
+```
+
+Output:
+```text
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/andreastsakiris/European-Policy-Analytics
+configfile: pytest.ini
+collected 32 items
+
+tests/test_calculations.py::test_percentage_change PASSED                [  3%]
+tests/test_calculations.py::test_percentage_point_change PASSED          [  6%]
+tests/test_calculations.py::test_cagr PASSED                             [  9%]
+tests/test_calculations.py::test_series_summary PASSED                   [ 12%]
+tests/test_connectors.py::test_eurostat_json_stat_parsing PASSED         [ 15%]
+tests/test_connectors.py::test_world_bank_parsing PASSED                 [ 18%]
+tests/test_connectors.py::test_world_bank_multi_page_pagination PASSED   [ 21%]
+tests/test_connectors.py::test_world_bank_european_country_coverage PASSED [ 25%]
+tests/test_normalizer.py::test_country_code_normalization PASSED         [ 28%]
+tests/test_normalizer.py::test_country_names PASSED                      [ 31%]
+tests/test_normalizer.py::test_eu27_list PASSED                          [ 34%]
+tests/test_normalizer.py::test_normalize_observation PASSED              [ 37%]
+tests/test_normalizer.py::test_deduplication PASSED                      [ 40%]
+tests/test_phase2_verification.py::test_production_ecb_time_weighted_policy_rate_calculation PASSED [ 43%]
+tests/test_phase2_verification.py::test_production_ecb_incomplete_current_year_warning PASSED [ 46%]
+tests/test_phase2_verification.py::test_production_analytics_precision_and_presentation PASSED [ 50%]
+tests/test_phase2_verification.py::test_production_ingestion_and_save_observations PASSED [ 53%]
+tests/test_phase2_verification.py::test_production_normalizer_and_validator PASSED [ 56%]
+tests/test_phase2_verification.py::test_audit_category_reconciliation PASSED [ 59%]
+tests/test_phase3_verification.py::test_production_source_matches_metadata PASSED [ 62%]
+tests/test_phase3_verification.py::test_source_attribution_matches_stored_observation PASSED [ 65%]
+tests/test_phase3_verification.py::test_hicp_and_cpi_not_interchangeable PASSED [ 68%]
+tests/test_phase3_verification.py::test_population_reference_period_documentation PASSED [ 71%]
+tests/test_phase3_verification.py::test_annual_average_and_yearend_interest_rates_distinct PASSED [ 75%]
+tests/test_phase3_verification.py::test_historical_revisions_require_evidence PASSED [ 78%]
+tests/test_phase3_verification.py::test_unverified_observations_not_labeled_verified PASSED [ 81%]
+tests/test_pipeline.py::test_seed_metadata PASSED                        [ 84%]
+tests/test_pipeline.py::test_save_observations PASSED                    [ 87%]
+tests/test_validator.py::test_valid_observation PASSED                   [ 90%]
+tests/test_validator.py::test_invalid_period PASSED                      [ 93%]
+tests/test_validator.py::test_outlier_sanity_check PASSED                [ 96%]
+tests/test_validator.py::test_null_value PASSED                          [100%]
+
+============================== 32 passed in 1.50s ==============================
+```
+
+---
+
+## 📁 Repository Structure
 
 ```
 European-Policy-Analytics/
-├── app.py                      # Main Streamlit application entry point
-├── config.py                   # Centralized paths, DB, API settings & timeouts
-├── requirements.txt            # Python dependencies
-├── pytest.ini                  # Pytest configuration
+├── config.py                  # Database paths, API endpoints, and global settings
+├── app.py                     # Streamlit application entrypoint & navigation
 ├── data/
-│   └── policy_analytics.db     # SQLite database storing normalized observations & logs
+│   └── policy_analytics.db    # SQLite relational database (12,541+ observations)
 ├── src/
-│   ├── models/                 # SQLAlchemy ORM models & Pydantic schemas
-│   │   ├── database.py
-│   │   └── schema.py
-│   ├── metadata/               # Countries (31 countries + EU27/EA20), domains, indicators catalog
-│   │   ├── countries.py
-│   │   ├── domains.py
-│   │   └── indicators.py
-│   ├── connectors/             # Resilient HTTP API connectors (retries, backoff, rate-limiting)
-│   │   ├── base.py
-│   │   ├── eurostat.py
-│   │   ├── ecb.py
-│   │   ├── worldbank.py
-│   │   └── oecd.py
-│   ├── pipeline/               # Data ingestion, normalizer, validator & database seeder
-│   │   ├── normalizer.py
-│   │   ├── validator.py
-│   │   ├── ingestion.py
-│   │   └── seed_data.py
-│   ├── analytics/              # Mathematical calculations, rankings, correlations
-│   │   ├── calculations.py
-│   │   ├── comparisons.py
-│   │   └── relationships.py
-│   └── ui/                     # Research-grade UI styling, Plotly charts & pages
-│       ├── styles.py
-│       ├── components.py
-│       ├── charts.py
-│       └── pages/
-│           ├── overview.py
-│           ├── country.py
-│           ├── comparison.py
-│           ├── indicators.py
-│           ├── rankings.py
-│           ├── trends.py
-│           ├── quality.py
-│           └── methodology.py
-└── tests/                      # Automated unit test suite (15 passing tests)
-    ├── test_calculations.py
-    ├── test_normalizer.py
-    ├── test_validator.py
-    └── test_pipeline.py
+│   ├── analytics/
+│   │   └── calculations.py    # Analytical metrics (Pct Change, Pct-Point, CAGR, Summary)
+│   ├── connectors/
+│   │   ├── base.py            # Abstract Base API connector with session retries
+│   │   ├── eurostat.py        # Eurostat REST API & JSON-stat parser
+│   │   ├── ecb.py             # ECB SDMX REST API & time-weighted policy rate calculator
+│   │   └── worldbank.py       # World Bank API v2 client with multi-page pagination
+│   ├── metadata/
+│   │   ├── countries.py       # European country registry & ISO normalization
+│   │   ├── domains.py         # Policy domain definitions
+│   │   └── indicators.py      # Indicator catalog, series keys, and units
+│   ├── models/
+│   │   └── database.py        # SQLAlchemy models & database initializer
+│   ├── pipeline/
+│   │   ├── ingestion.py       # Live API ingestion pipeline orchestrator
+│   │   ├── normalizer.py      # ISO normalization & record deduplication
+│   │   └── validator.py       # Data validation & quality rule checker
+│   └── ui/
+│       ├── components/        # Reusable Streamlit UI components & charts
+│       └── pages/             # 8 Dedicated analytical dashboard page modules
+├── tests/                     # 32 Comprehensive automated pytest unit tests
+├── FINAL_PRE_RELEASE_AUDIT.md # Complete audit documentation & empirical evidence
+├── requirements.txt           # Python dependencies
+├── pytest.ini                 # Pytest configuration
+└── README.md                  # System documentation & quickstart guide
 ```
 
 ---
 
-## 🚀 Quickstart Guide
+## 📜 License & Data Attribution
 
-### 1. Requirements
-- Python 3.10+
-- `pip`
-
-### 2. Installation
-```bash
-# Clone or navigate to the project directory
-cd European-Policy-Analytics
-
-# Install required dependencies
-python3 -m pip install -r requirements.txt
-```
-
-### 3. Run Automated Test Suite
-```bash
-python3 -m pytest
-```
-
-### 4. Launch Application
-```bash
-python3 -m streamlit run app.py
-```
-
-Open your browser at `http://localhost:8501` to explore the European Policy Analytics platform.
-
----
-
-## 🧪 Testing Summary
-
-The test suite verifies:
-- **ISO 3166-1 Code Normalization:** Eurostat `EL` $\rightarrow$ `GRC`, `UK` $\rightarrow$ `GBR`, `DE` $\rightarrow$ `DEU`.
-- **Deduplication Logic:** Handling duplicate dataset observations by keeping latest reported value.
-- **Mathematical Accuracy:** Percentage change vs. percentage-point change, CAGR calculations, zero-denominator safety.
-- **Data Quality Validation:** Plausible bounds checks for unemployment ($[0\%, 60\%]$), government debt ($[0\%, 300\%]$), and outlier detection.
-- **Database Operations:** Table creation, metadata seeding, observation upserts, and ingestion logging.
-
----
-
-## 🚫 Out of Scope (Version 1.0)
-As specified in requirements, policy simulation, hypothetical scenario modeling, predictive policy impact calculators, and simulated tax/rate changes are **explicitly out of scope** for V1 to ensure strict factual reliability.
-
----
-
-## 📄 License & Attribution
-Designed for policy research and economic analysis using official open statistical data from **Eurostat**, **European Central Bank**, **World Bank**, and **OECD**.
+Data provided by:
+- **Eurostat** under the [Eurostat Reuse Policy](https://ec.europa.eu/eurostat/about-us/policies/copyright).
+- **European Central Bank (ECB)** under the [ECB Open Data License](https://www.ecb.europa.eu/services/terms/html/index.en.html).
+- **World Bank** under the [World Bank Open Data License](https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets).
