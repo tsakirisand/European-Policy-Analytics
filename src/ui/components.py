@@ -33,10 +33,12 @@ def render_metric_card(
     change_val: Optional[float] = None,
     change_label: str = "YoY",
     is_percentage_point: bool = False,
-    better_direction: str = "high"
+    better_direction: str = "high",
+    tooltip: Optional[str] = None
 ):
     """
     Renders styled HTML metric card with percentage or percentage-point change indicators.
+    All cards are designed for strict equal height, clean typography, and baseline alignment.
     """
     change_html = ""
     if change_val is not None:
@@ -48,12 +50,19 @@ def render_metric_card(
         is_bad = (change_val < 0 and better_direction == "high") or (change_val > 0 and better_direction == "low")
 
         cls = "metric-change-pos" if is_good else ("metric-change-neg" if is_bad else "metric-change-neu")
-        change_html = f'<span class="{cls}">{sign}{change_val:.2f}{unit_suffix}</span> <span style="font-size: 0.75rem; color: #64748b;">({change_label})</span>'
+        change_html = f'<span class="{cls}">{sign}{change_val:.2f}{unit_suffix}</span> <span style="font-size: 0.72rem; color: #64748b;">({change_label})</span>'
+    else:
+        change_html = '<span style="color: #475569; font-size: 0.75rem;">&nbsp;</span>'
+
+    title_attr = f' title="{tooltip}"' if tooltip else ""
+    unit_html = f'<span class="metric-unit">{unit_str}</span>' if unit_str else ''
 
     st.markdown(f"""
-        <div class="metric-card">
+        <div class="metric-card"{title_attr}>
             <div class="metric-title">{title}</div>
-            <div class="metric-value">{value_str} <span style="font-size: 0.9rem; color: #94a3b8;">{unit_str}</span></div>
+            <div class="metric-value-box">
+                <div class="metric-value">{value_str} {unit_html}</div>
+            </div>
             <div class="metric-sub">{change_html}</div>
         </div>
     """, unsafe_allow_html=True)

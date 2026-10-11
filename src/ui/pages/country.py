@@ -114,7 +114,18 @@ def render(df_obs: pd.DataFrame):
                 is_pp = ind_meta.get("change_type") == "pct_point"
                 chg = calculate_percentage_point_change(prev_v, v) if is_pp else calculate_percentage_change(prev_v, v)
 
-                val_format = f"{v:,.0f}" if v >= 1000 else f"{v:,.2f}"
+                tooltip_text = None
+                if ind_key == "POPULATION":
+                    if v >= 1_000_000:
+                        val_format = f"{v / 1_000_000:.2f}M"
+                    else:
+                        val_format = f"{v:,.0f}"
+                    tooltip_text = f"Official Population: {v:,.0f} inhabitants"
+                elif v >= 1000:
+                    val_format = f"{v:,.0f}"
+                else:
+                    val_format = f"{v:,.2f}"
+
                 render_metric_card(
                     title=kpi_label,
                     value_str=val_format,
@@ -122,7 +133,8 @@ def render(df_obs: pd.DataFrame):
                     change_val=chg,
                     change_label=f"vs {p-1}",
                     is_percentage_point=is_pp,
-                    better_direction=ind_meta.get("better_direction", "high")
+                    better_direction=ind_meta.get("better_direction", "high"),
+                    tooltip=tooltip_text
                 )
             else:
                 st.info(f"N/A ({kpi_label})")

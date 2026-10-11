@@ -21,15 +21,49 @@ def apply_custom_css():
             border-right: 1px solid #1f2937;
         }
 
-        /* Metric Cards */
+        /* Force Streamlit column containers to stretch to 100% height for equal card alignment */
+        div[data-testid="stHorizontalBlock"] {
+            align-items: stretch !important;
+        }
+
+        div[data-testid="column"] {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+        }
+
+        div[data-testid="column"] > div {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 1 auto !important;
+            height: 100% !important;
+        }
+
+        div[data-testid="column"] [data-testid="stVerticalBlock"],
+        div[data-testid="column"] [data-testid="stElementContainer"],
+        div[data-testid="column"] [data-testid="stMarkdown"],
+        div[data-testid="column"] [data-testid="stMarkdownContainer"] {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 1 auto !important;
+            height: 100% !important;
+        }
+
+        /* Metric Cards - Strict Equal Height & Flex Alignment */
         .metric-card {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #334155;
             border-radius: 12px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
+            padding: 0.9rem 0.85rem;
+            margin-bottom: 0.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s ease, border-color 0.2s ease;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            height: 100% !important;
+            min-height: 152px !important;
+            box-sizing: border-box !important;
         }
         .metric-card:hover {
             border-color: #38bdf8;
@@ -37,22 +71,52 @@ def apply_custom_css():
         }
         .metric-title {
             color: #94a3b8;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 0.4rem;
+            min-height: 2.2rem;
+            line-height: 1.25;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+        .metric-value-box {
+            display: flex;
+            align-items: baseline;
+            margin: 0.25rem 0;
+            min-height: 2rem;
         }
         .metric-value {
             color: #f8fafc;
-            font-size: 1.8rem;
+            font-size: clamp(1.15rem, 1.35vw, 1.38rem);
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.15;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            flex-wrap: nowrap;
+        }
+        .metric-unit {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #94a3b8;
+            white-space: nowrap;
         }
         .metric-sub {
             color: #64748b;
-            font-size: 0.8rem;
+            font-size: 0.74rem;
             margin-top: 0.3rem;
+            min-height: 1.2rem;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .metric-change-pos {
             color: #34d399;
