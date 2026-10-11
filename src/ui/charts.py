@@ -198,3 +198,63 @@ def create_europe_map_chart(
         )
     )
     return fig
+
+def create_radar_chart(
+    country_name: str,
+    categories: List[str],
+    country_scores: List[float],
+    benchmark_name: str = "EU-27 Benchmark",
+    benchmark_scores: Optional[List[float]] = None
+) -> go.Figure:
+    """
+    Builds multidimensional radar (spider) chart comparing country vs benchmark.
+    Scores normalized on a 0-100 scale.
+    """
+    fig = go.Figure()
+
+    # Close polygon by repeating first value
+    cats_loop = categories + [categories[0]]
+    country_loop = country_scores + [country_scores[0]]
+
+    fig.add_trace(go.Scatterpolar(
+        r=country_loop,
+        theta=cats_loop,
+        fill='toself',
+        fillcolor='rgba(56, 189, 248, 0.3)',
+        line=dict(color='#38bdf8', width=2.5),
+        name=country_name
+    ))
+
+    if benchmark_scores:
+        bench_loop = benchmark_scores + [benchmark_scores[0]]
+        fig.add_trace(go.Scatterpolar(
+            r=bench_loop,
+            theta=cats_loop,
+            fill='toself',
+            fillcolor='rgba(251, 191, 36, 0.15)',
+            line=dict(color='#fbbf24', width=2, dash='dot'),
+            name=benchmark_name
+        ))
+
+    fig.update_layout(
+        **LAYOUT_TEMPLATE,
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 100],
+                gridcolor="#1e293b",
+                linecolor="#334155",
+                tickfont=dict(size=10, color="#94a3b8")
+            ),
+            angularaxis=dict(
+                gridcolor="#1e293b",
+                linecolor="#334155",
+                tickfont=dict(size=12, color="#f8fafc")
+            ),
+            bgcolor="rgba(15, 23, 42, 0.6)"
+        ),
+        showlegend=True,
+        title=f"Policy Performance Profile: {country_name} vs {benchmark_name}"
+    )
+    return fig
+
