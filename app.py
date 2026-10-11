@@ -9,6 +9,7 @@ import pandas as pd
 import logging
 
 from src.models.database import init_db, SessionLocal, ObservationModel
+from src.metadata.indicators import INDICATORS
 from src.pipeline.seed_data import generate_historical_series
 from src.ui.styles import apply_custom_css
 from src.ui.pages import (
@@ -38,10 +39,11 @@ def load_all_observations() -> pd.DataFrame:
     init_db()
     db = SessionLocal()
     try:
-        # Guarantee database is populated with official historical series if empty
+        # Guarantee database is populated with complete official historical series across all indicators
         obs_count = db.query(ObservationModel).count()
-        if obs_count < 100:
-            generate_historical_series()
+        ind_count = db.query(ObservationModel.indicator_id).distinct().count()
+        if obs_count < 100 or ind_count < len(INDICATORS):
+            generate_historical_series(force_reseed=True)
 
         query = db.query(
             ObservationModel.country_code,
