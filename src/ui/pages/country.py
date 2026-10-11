@@ -40,10 +40,10 @@ def render(df_obs: pd.DataFrame):
 
     default_idx = all_countries.index("CZE") if "CZE" in all_countries else (all_countries.index("GRC") if "GRC" in all_countries else 0)
 
-    min_yr = int(df_obs["period"].min())
-    max_yr = int(df_obs["period"].max())
+    start_year = int(df_obs["period"].min())
+    end_year = int(df_obs["period"].max())
 
-    c_sel1, c_sel2, c_sel3 = st.columns([1.5, 1.5, 2])
+    c_sel1, c_sel2 = st.columns([1, 1])
     with c_sel1:
         selected_iso3 = st.selectbox(
             "Select European Country:",
@@ -60,16 +60,6 @@ def render(df_obs: pd.DataFrame):
             format_func=lambda code: f"{get_country_flag(code)} {get_country_name(code)} ({code})",
             key="country_explorer_benchmark"
         )
-    with c_sel3:
-        year_range = st.slider(
-            "Analysis Time Horizon:",
-            min_value=min_yr,
-            max_value=max_yr,
-            value=(2010, max_yr),
-            key="country_explorer_time_slider"
-        )
-
-    start_year, end_year = year_range
     meta = COUNTRIES.get(selected_iso3, {})
     bench_meta = COUNTRIES.get(benchmark_target, {})
 
