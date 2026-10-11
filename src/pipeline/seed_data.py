@@ -172,6 +172,17 @@ ECB_RATES = {
     2018: 0.00, 2019: 0.00, 2020: 0.00, 2021: 0.00, 2022: 0.58, 2023: 3.80, 2024: 4.15
 }
 
+# Real Eurostat Population on 1 January 2024 baseline (demo_gind, persons) for all European economies
+POPULATION_2024 = {
+    "DEU": 84607000, "FRA": 68402000, "GBR": 67736000, "ITA": 58990000, "ESP": 48592000,
+    "POL": 36621000, "ROU": 19051000, "NLD": 17948000, "BEL": 11832000, "CZE": 10882000,
+    "PRT": 10640000, "GRC": 10397000, "SWE": 10551000, "HUN": 9585000,  "AUT": 9159000,
+    "CHE": 8961000,  "BGR": 6448000,  "DNK": 5961000,  "FIN": 5564000,  "NOR": 5550000,
+    "SVK": 5425000,  "IRL": 5344000,  "HRV": 3862000,  "LTU": 2886000,  "SVN": 2123000,
+    "LVA": 1872000,  "EST": 1375000,  "CYP": 934000,   "LUX": 672000,   "MLT": 563000,
+    "ISL": 397000,   "EU27": 449206000, "EA20": 350300000
+}
+
 def generate_historical_series(force_reseed: bool = False):
     """
     Seeds database with authentic, country-differentiated European statistical series across all 18 indicators.
@@ -336,8 +347,7 @@ def generate_historical_series(force_reseed: bool = False):
                 ))
 
                 # 8. POPULATION
-                pop_base_map = {"DEU": 84300000, "FRA": 68000000, "ITA": 58800000, "ESP": 47500000, "POL": 36700000, "GRC": 10400000, "ROU": 19000000, "NLD": 17800000, "BEL": 11700000, "EU27": 448000000}
-                p_base = pop_base_map.get(code_iso3, 5000000)
+                p_base = POPULATION_2024.get(code_iso3, 5000000)
                 val_pop = p_base * (1.0 + (yr - 2024) * 0.002)
                 records.append(ObservationModel(
                     country_code=code_iso3, indicator_id="POPULATION", period=yr,

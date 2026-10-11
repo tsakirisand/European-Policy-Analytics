@@ -42,7 +42,13 @@ def load_all_observations() -> pd.DataFrame:
         # Guarantee database is populated with complete official historical series across all indicators
         obs_count = db.query(ObservationModel).count()
         ind_count = db.query(ObservationModel.indicator_id).distinct().count()
-        if obs_count < 100 or ind_count < len(INDICATORS):
+        sample_pop = db.query(ObservationModel).filter_by(country_code="CZE", indicator_id="POPULATION", period=2024).first()
+        needs_reseed = (
+            obs_count < 100
+            or ind_count < len(INDICATORS)
+            or (sample_pop and sample_pop.value < 8000000)
+        )
+        if needs_reseed:
             generate_historical_series(force_reseed=True)
 
         query = db.query(
