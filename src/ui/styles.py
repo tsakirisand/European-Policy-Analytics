@@ -21,6 +21,58 @@ def apply_custom_css():
             border-right: 1px solid #1f2937;
         }
 
+        /* Enlarge Navigation Radio Menu */
+        section[data-testid="stSidebar"] div[data-testid="stRadio"] > label {
+            display: none !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] {
+            gap: 0.35rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            margin-top: 0.25rem !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label {
+            padding: 0.65rem 0.85rem !important;
+            border-radius: 9px !important;
+            background-color: rgba(30, 41, 59, 0.45) !important;
+            border: 1px solid rgba(51, 65, 85, 0.6) !important;
+            transition: all 0.2s ease-in-out !important;
+            cursor: pointer !important;
+            margin-bottom: 0.2rem !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
+            background-color: #1e293b !important;
+            border-color: #38bdf8 !important;
+            transform: translateX(3px) !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label:has(input:checked) {
+            background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%) !important;
+            border-color: #0284c7 !important;
+            border-left: 4px solid #38bdf8 !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label p,
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label div[data-testid="stMarkdownContainer"] p {
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            color: #f1f5f9 !important;
+            line-height: 1.35 !important;
+            letter-spacing: 0.01em !important;
+        }
+
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label:has(input:checked) p,
+        section[data-testid="stSidebar"] div[role="radiogroup"] > label:has(input:checked) div[data-testid="stMarkdownContainer"] p {
+            color: #38bdf8 !important;
+            font-weight: 700 !important;
+        }
+
         /* Force Streamlit column containers to stretch to 100% height for equal card alignment */
         div[data-testid="stHorizontalBlock"] {
             align-items: stretch !important;

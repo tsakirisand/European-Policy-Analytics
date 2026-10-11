@@ -81,7 +81,11 @@ def main():
     """, unsafe_allow_html=True)
 
     # Navigation Menu
-    st.sidebar.markdown("### 📌 Navigation")
+    st.sidebar.markdown("""
+        <div style="font-size: 1.15rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.6rem; letter-spacing: 0.02em;">
+            📌 Navigation
+        </div>
+    """, unsafe_allow_html=True)
     
     pages = {
         "Executive Overview": ("📊", overview),
@@ -95,10 +99,11 @@ def main():
     }
 
     selected_page_name = st.sidebar.radio(
-        "Go to Page:",
+        "Navigation Menu",
         list(pages.keys()),
-        format_func=lambda k: f"{pages[k][0]} {k}",
-        key="main_nav_radio"
+        format_func=lambda k: f"{pages[k][0]}   {k}",
+        key="main_nav_radio",
+        label_visibility="collapsed"
     )
 
     st.sidebar.markdown("---")
