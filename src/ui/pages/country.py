@@ -19,6 +19,7 @@ from src.analytics.calculations import (
     calculate_series_summary, calculate_percentage_point_change, calculate_percentage_change, calculate_cagr
 )
 from src.analytics.comparisons import rank_countries
+from src.analytics.synthesis import generate_country_synthesis
 from src.ui.components import render_header, render_metric_card, render_csv_download_button, render_source_info
 from src.ui.charts import create_time_series_chart, create_radar_chart, LAYOUT_TEMPLATE, COLOR_PALETTE
 
@@ -235,12 +236,126 @@ def render(df_obs: pd.DataFrame):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 3. Eight Policy Domain Deep-Dive Tabs
+    # 3. Eight Policy Domain Deep-Dive Tabs + Strategic Synthesis Tab
     domain_keys = list(DOMAINS.keys())
-    tabs = st.tabs([f"{DOMAINS[d]['icon']} {DOMAINS[d]['name']}" for d in domain_keys])
+    tab_titles = ["🧠 What the Data Show & Strategic Analysis"] + [f"{DOMAINS[d]['icon']} {DOMAINS[d]['name']}" for d in domain_keys]
+    tabs = st.tabs(tab_titles)
 
+    # TAB 0: WHAT THE DATA SHOW & STRATEGIC SYNTHESIS
+    with tabs[0]:
+        synthesis = generate_country_synthesis(df_obs, selected_iso3, benchmark_target, start_year, end_year)
+
+        st.markdown(f"### 🧠 What the Data Show: Comprehensive Analysis & Strategic Results")
+        st.markdown(f"**Empirical diagnosis for {meta.get('name')} benchmarked against {bench_meta.get('name', benchmark_target)} over {start_year}–{end_year}.**")
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Executive Verdict Card
+        st.markdown(f"""
+            <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-left: 5px solid #38bdf8; border-radius: 8px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 1.1rem; color: #f8fafc; font-weight: 600; margin-bottom: 0.5rem;">🎯 Executive Synthesis & Macro Verdict</div>
+                <div style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
+                    {synthesis['executive_verdict']}
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
+        # What the Data Show (4 Core Pillars)
+        st.markdown("#### 🔍 What the Data Explicitly Demonstrate")
+        st.markdown("*Empirical findings derived from verified official Eurostat, ECB, World Bank, and OECD datasets:*")
+        
+        c_f1, c_f2 = st.columns(2)
+        for f_idx, item in enumerate(synthesis["findings"]):
+            target_col = c_f1 if f_idx % 2 == 0 else c_f2
+            with target_col:
+                st.markdown(f"""
+                    <div style="background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div style="font-weight: 700; color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.4rem;">{item['pillar']}</div>
+                        <div style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.5;">{item['observation']}</div>
+                    </div>
+                """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Strengths vs Vulnerabilities Scorecard
+        st.markdown("#### ⚖️ Structural Competitive Edges vs. Policy Vulnerabilities")
+        col_str, col_vuln = st.columns(2)
+
+        with col_str:
+            st.markdown("""
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 1.2rem;">🟢</span>
+                    <strong style="color: #34d399; font-size: 1rem;">Empirical Strengths & Outperformance</strong>
+                </div>
+            """, unsafe_allow_html=True)
+            if synthesis["strengths"]:
+                for s in synthesis["strengths"]:
+                    st.markdown(f"""
+                        <div style="background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 6px; padding: 0.75rem; margin-bottom: 0.5rem; font-size: 0.88rem; color: #f0fdf4;">
+                            {s}
+                        </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.info("No standout comparative strengths identified in the current period.")
+
+        with col_vuln:
+            st.markdown("""
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span style="font-size: 1.2rem;">🔴</span>
+                    <strong style="color: #f87171; font-size: 1rem;">Structural Vulnerabilities & Policy Risks</strong>
+                </div>
+            """, unsafe_allow_html=True)
+            if synthesis["vulnerabilities"]:
+                for v in synthesis["vulnerabilities"]:
+                    st.markdown(f"""
+                        <div style="background: rgba(248, 113, 113, 0.08); border: 1px solid rgba(248, 113, 113, 0.25); border-radius: 6px; padding: 0.75rem; margin-bottom: 0.5rem; font-size: 0.88rem; color: #fef2f2;">
+                            {v}
+                        </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.info("No critical structural vulnerabilities detected in the current period.")
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # What We Gather from Them (Strategic Deductions)
+        st.markdown("#### 💡 What We Gather From Them: Strategic Conclusions & Takeaways")
+        st.markdown("*Translating empirical trends into actionable policy insights:*")
+
+        for takeaway in synthesis["takeaways"]:
+            st.markdown(f"""
+                <div style="background: #0f172a; border-left: 4px solid #fbbf24; border-radius: 6px; padding: 0.85rem 1rem; margin-bottom: 0.6rem; font-size: 0.9rem; color: #f8fafc;">
+                    {takeaway}
+                </div>
+            """, unsafe_allow_html=True)
+
+        # Downloadable Strategic Brief
+        briefing_md = f"""# Strategic Policy Assessment: {meta.get('name')} ({selected_iso3})
+**Reference Horizon:** {start_year} - {end_year}
+**Benchmark Target:** {bench_meta.get('name', benchmark_target)}
+
+## Executive Verdict
+{synthesis['executive_verdict']}
+
+## Empirical Findings
+""" + "\n".join([f"### {f['pillar']}\n{f['observation']}\n" for f in synthesis['findings']]) + f"""
+## Comparative Strengths
+""" + "\n".join([f"- {s}" for s in synthesis['strengths']]) + f"""
+
+## Structural Vulnerabilities
+""" + "\n".join([f"- {v}" for v in synthesis['vulnerabilities']]) + f"""
+
+## Strategic Takeaways
+""" + "\n".join([f"- {t}" for t in synthesis['takeaways']])
+
+        st.download_button(
+            label="📄 Download Complete Strategic Analysis Brief (Markdown)",
+            data=briefing_md.encode('utf-8'),
+            file_name=f"{selected_iso3}_strategic_analysis_{start_year}_{end_year}.md",
+            mime="text/markdown"
+        )
+
+    # Granular Policy Domain Tabs (Index 1 to 8)
     for idx, d_key in enumerate(domain_keys):
-        with tabs[idx]:
+        with tabs[idx + 1]:
             d_meta = DOMAINS[d_key]
             st.markdown(f"#### {d_meta['icon']} {d_meta['name']} Analytical Profile")
             st.markdown(f"*{d_meta['description']}*")

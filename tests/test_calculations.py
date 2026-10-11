@@ -44,3 +44,21 @@ def test_series_summary():
     assert summary["max"] == 15.0
     assert summary["mean"] == 12.333333333333334
     assert summary["yoy_pp_change"] == 3.0
+
+def test_country_synthesis():
+    from src.analytics.synthesis import generate_country_synthesis
+    df_sample = pd.DataFrame([
+        {"country_code": "CZE", "indicator_id": "GDP_PC_PPP", "period": 2024, "value": 91.0},
+        {"country_code": "CZE", "indicator_id": "UNEMP_RATE", "period": 2024, "value": 3.26},
+        {"country_code": "CZE", "indicator_id": "AVG_NET_ANNUAL_SALARY", "period": 2010, "value": 11000.0},
+        {"country_code": "CZE", "indicator_id": "AVG_NET_ANNUAL_SALARY", "period": 2024, "value": 17200.0},
+        {"country_code": "CZE", "indicator_id": "MINIMUM_MONTHLY_WAGE", "period": 2024, "value": 764.4},
+        {"country_code": "EU27", "indicator_id": "GDP_PC_PPP", "period": 2024, "value": 100.0},
+        {"country_code": "EU27", "indicator_id": "UNEMP_RATE", "period": 2024, "value": 6.0},
+    ])
+    synthesis = generate_country_synthesis(df_sample, "CZE", "EU27", 2010, 2024)
+    assert synthesis["country_code"] == "CZE"
+    assert "Czechia" in synthesis["executive_verdict"]
+    assert len(synthesis["findings"]) == 4
+    assert len(synthesis["takeaways"]) >= 3
+    assert synthesis["metrics_summary"]["kaitz_index"] is not None
