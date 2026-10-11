@@ -201,12 +201,27 @@ INDICATORS: Dict[str, IndicatorMeta] = {
         "change_type": "pct_point",
         "better_direction": "neutral"
     },
-    "AVG_ANNUAL_WAGE": {
-        "id": "AVG_ANNUAL_WAGE",
+    "AVG_FULL_TIME_ADJUSTED_SALARY": {
+        "id": "AVG_FULL_TIME_ADJUSTED_SALARY",
         "domain_id": "LABOUR",
+        "name": "Average Full-Time Adjusted Salary per Employee",
+        "short_name": "Avg Full-Time Adjusted Salary",
+        "description": "Average annual gross salary per employee adjusted for full-time equivalents (Eurostat nama_10_fte). Computed in national accounts as total gross wages and salaries divided by full-time equivalent employees. Used across the EU for wage benchmarking and Blue Card Directive (EU) 2021/1883 thresholds.",
+        "unit": "Euros per year",
+        "unit_symbol": "€",
+        "frequency": "Annual",
+        "source_provider": "Eurostat",
+        "source_dataset_code": "nama_10_fte",
+        "source_url": "https://ec.europa.eu/eurostat/databrowser/view/nama_10_fte/default/table",
+        "change_type": "pct",
+        "better_direction": "high"
+    },
+    "GDP_PER_CAPITA": {
+        "id": "GDP_PER_CAPITA",
+        "domain_id": "ECON",
         "name": "Gross Domestic Product per Capita (Current USD)",
         "short_name": "GDP per Capita (USD)",
-        "description": "Gross domestic product per capita expressed in current US dollars.",
+        "description": "Gross domestic product divided by midyear population, expressed in current US dollars (World Bank NY.GDP.PCAP.CD). Standardized measure of national economic output per resident.",
         "unit": "US Dollars",
         "unit_symbol": "$",
         "frequency": "Annual",

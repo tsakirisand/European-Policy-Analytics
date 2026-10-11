@@ -49,9 +49,31 @@ def render():
 
         ---
 
+        ---
+
         ### 4. Non-Negotiable Data Integrity Rules
         1. **Zero Fake Data:** Every visible observation originates from an official dataset (Eurostat, ECB, World Bank, OECD).
         2. **Transparent Missing Values:** Missing observations are left as `None`/`NaN` and disclosed in rankings/tables. They are **NEVER** filled with zero.
         3. **No Policy Simulation in V1:** As requested, this application is strictly an analytical research platform based on empirical facts. No scenario calculators or simulated tax/rate changes are included.
-        4. **Correlation $\\neq$ Causation:** Statistical relationships in scatter plots quantify linear association ($r, R^2$), not causal impacts.
+        4. **Correlation $\neq$ Causation:** Statistical relationships in scatter plots quantify linear association ($r, R^2$), not causal impacts.
+
+        ---
+
+        ### 5. Wage & Income Indicators vs. Macroeconomic Output
+
+        #### A. Average Full-Time Adjusted Salary per Employee (`nama_10_fte`)
+        - **Official Definition:** Computed in National Accounts (ESA 2010 transmission programme) by dividing total gross wages and salaries by the total number of full-time equivalent (FTE) employees.
+        - **Regulatory Purpose:** Serves as the official benchmark across the European Union for wage monitoring and statutory thresholds, notably for the **EU Blue Card Directive (EU) 2021/1883**.
+        - **Official ESMS Documentation:** Cited from [Eurostat nama_10_fte Metadata](https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_fte_esms.htm).
+        - **Dimensions & Units:** Frequency: Annual (`freq=A`); Unit: Euros (`unit=EUR`).
+        - **Coverage Limitations:** Disseminated for 26 EU Member States, EU27 aggregate, and Euro Area (`EA20`). Note: The Netherlands (`NLD`) is not included in standard Eurostat `nama_10_fte` publication due to specific national register-based calculation methodologies. Non-EU countries (Iceland, Norway, Switzerland, UK) do not report under this ESA table.
+
+        #### B. Average Net Annual Salary (`earn_nt_net`)
+        - Measures annual net take-home pay for a single earner without children earning 100% of average earnings, after deducting personal income taxes and employee social contributions.
+
+        #### C. Statutory Minimum Monthly Wage (`earn_mw_cur`)
+        - National statutory gross monthly wage floor established by law or central collective bargaining agreements.
+
+        #### D. Gross Domestic Product per Capita (`NY.GDP.PCAP.CD`)
+        - **Macroeconomic Boundary:** GDP per capita divides total gross value added by midyear population in current US Dollars. It reflects overall economic production per resident, **not employee earnings or wages**. It is maintained strictly as an Economy (`ECON`) indicator and is decoupled from Labour & Income.
     """)

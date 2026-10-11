@@ -41,6 +41,10 @@ def seed_metadata(db: Session):
             db.add(c)
     db.commit()
 
+    # Purge any deprecated indicators
+    db.query(IndicatorModel).filter(IndicatorModel.id == "AVG_ANNUAL_WAGE").delete(synchronize_session=False)
+    db.commit()
+
     for ind_id, meta in INDICATORS.items():
         existing = db.query(IndicatorModel).filter(IndicatorModel.id == ind_id).first()
         if not existing:
@@ -60,6 +64,19 @@ def seed_metadata(db: Session):
                 better_direction=meta["better_direction"]
             )
             db.add(i)
+        else:
+            existing.domain_id = meta["domain_id"]
+            existing.name = meta["name"]
+            existing.short_name = meta["short_name"]
+            existing.description = meta["description"]
+            existing.unit = meta["unit"]
+            existing.unit_symbol = meta["unit_symbol"]
+            existing.frequency = meta["frequency"]
+            existing.source_provider = meta["source_provider"]
+            existing.source_dataset_code = meta["source_dataset_code"]
+            existing.source_url = meta["source_url"]
+            existing.change_type = meta["change_type"]
+            existing.better_direction = meta["better_direction"]
     db.commit()
 
 def save_observations(db: Session, records: List[Dict[str, Any]]) -> int:
@@ -141,10 +158,16 @@ def run_ingestion_pipeline(indicator_ids: Optional[List[str]] = None) -> Dict[st
                     raw_records = wb_connector.fetch_indicator("SP.DYN.LE00.IN", 2000, 2025, country_codes=european_iso3_codes)
                 elif ind_id == "TRADE_BALANCE_GDP":
                     raw_records = wb_connector.fetch_indicator("NE.RSB.GNFS.ZS", 2000, 2025, country_codes=european_iso3_codes)
-                elif ind_id == "AVG_ANNUAL_WAGE":
+                elif ind_id == "GDP_PER_CAPITA":
                     raw_records = wb_connector.fetch_indicator("NY.GDP.PCAP.CD", 2000, 2025, country_codes=european_iso3_codes)
 
                 # 2. Eurostat API Connectors with explicit dimension filters
+                elif ind_id == "AVG_FULL_TIME_ADJUSTED_SALARY":
+                    raw_records = eurostat_connector.fetch_dataset("nama_10_fte", {"unit": "EUR"})
+                elif ind_id == "MINIMUM_MONTHLY_WAGE":
+                    raw_records = eurostat_connector.fetch_dataset("earn_mw_cur", {"currency": "EUR"})
+                elif ind_id == "AVG_NET_ANNUAL_SALARY":
+                    raw_records = eurostat_connector.fetch_dataset("earn_nt_net", {"currency": "EUR"})
                 elif ind_id == "GDP_REAL_GROWTH":
                     raw_records = eurostat_connector.fetch_dataset("nama_10_gdp", {"unit": "CLV_PCH_PRE", "na_item": "B1GQ"})
                 elif ind_id == "UNEMP_RATE":

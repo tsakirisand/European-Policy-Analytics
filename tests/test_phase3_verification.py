@@ -32,9 +32,10 @@ def test_production_source_matches_metadata():
         "HOUSEHOLD_LENDING_RATE": ("European Central Bank", "MIR/M.DE.B.A2C.A.R.A.2250.EUR.N"),
         "LIFE_EXPECTANCY": ("World Bank", "SP.DYN.LE00.IN"),
         "TRADE_BALANCE_GDP": ("World Bank", "NE.RSB.GNFS.ZS"),
-        "AVG_ANNUAL_WAGE": ("World Bank", "NY.GDP.PCAP.CD"),
+        "AVG_FULL_TIME_ADJUSTED_SALARY": ("Eurostat", "nama_10_fte"),
         "MINIMUM_MONTHLY_WAGE": ("Eurostat", "earn_mw_cur"),
-        "AVG_NET_ANNUAL_SALARY": ("Eurostat", "earn_nt_net")
+        "AVG_NET_ANNUAL_SALARY": ("Eurostat", "earn_nt_net"),
+        "GDP_PER_CAPITA": ("World Bank", "NY.GDP.PCAP.CD")
     }
 
     for ind_id, (exp_prov, exp_dcode) in expected_sources.items():
@@ -140,3 +141,74 @@ def test_unverified_observations_not_labeled_verified():
     assert unverified_rec["is_valid"] is False
     assert unverified_rec["value"] is None
     assert "Missing" in unverified_rec["validation_note"]
+
+def test_wage_indicator_cannot_use_gdp_per_capita():
+    """
+    Verify that AVG_FULL_TIME_ADJUSTED_SALARY points strictly to Eurostat nama_10_fte in Euros,
+    that it cannot use World Bank NY.GDP.PCAP.CD, and that AVG_ANNUAL_WAGE is eliminated.
+    """
+    assert "AVG_ANNUAL_WAGE" not in INDICATORS, "Deprecated AVG_ANNUAL_WAGE must be removed from catalog"
+
+    fte_meta = INDICATORS.get("AVG_FULL_TIME_ADJUSTED_SALARY")
+    assert fte_meta is not None
+    assert fte_meta["source_provider"] == "Eurostat"
+    assert fte_meta["source_dataset_code"] == "nama_10_fte"
+    assert fte_meta["unit_symbol"] == "€"
+    assert "nama_10_fte" in fte_meta["source_url"]
+
+    # Verify GDP_PER_CAPITA is distinct
+    gdp_meta = INDICATORS.get("GDP_PER_CAPITA")
+    assert gdp_meta is not None
+    assert gdp_meta["source_provider"] == "World Bank"
+    assert gdp_meta["source_dataset_code"] == "NY.GDP.PCAP.CD"
+    assert gdp_meta["unit_symbol"] == "$"
+    assert gdp_meta["domain_id"] == "ECON"
+
+    # Verify database records
+    init_db()
+    db = SessionLocal()
+    try:
+        # Zero old AVG_ANNUAL_WAGE in database
+        old_count = db.query(ObservationModel).filter_by(indicator_id="AVG_ANNUAL_WAGE").count()
+        assert old_count == 0, f"Found {old_count} forbidden AVG_ANNUAL_WAGE observations in database"
+
+        # Verify AVG_FULL_TIME_ADJUSTED_SALARY records exist with Eurostat dataset_code
+        sample_fte = db.query(ObservationModel).filter_by(indicator_id="AVG_FULL_TIME_ADJUSTED_SALARY").first()
+        assert sample_fte is not None
+        assert sample_fte.dataset_code == "nama_10_fte"
+        assert "Euro" in sample_fte.unit
+
+        # Verify GDP_PER_CAPITA records exist with World Bank dataset_code
+        sample_gdp = db.query(ObservationModel).filter_by(indicator_id="GDP_PER_CAPITA").first()
+        assert sample_gdp is not None
+        assert sample_gdp.dataset_code == "NY.GDP.PCAP.CD"
+        assert "Dollar" in sample_gdp.unit
+    finally:
+        db.close()
+
+def test_eurostat_nama_10_fte_connector_parsing():
+    """Verify Eurostat JSON-stat parser handles nama_10_fte dimension stride structure."""
+    mock_data = {
+        "id": ["freq", "unit", "geo", "time"],
+        "size": [1, 1, 2, 2],
+        "dimension": {
+            "freq": {"category": {"index": {"A": 0}}},
+            "unit": {"category": {"label": {"EUR": "Euro"}}},
+            "geo": {"category": {"index": {"DE": 0, "FR": 1}}},
+            "time": {"category": {"index": {"2023": 0, "2024": 1}}}
+        },
+        "value": {
+            "0": 50996.0,  # DE 2023
+            "1": 53791.0,  # DE 2024
+            "2": 42771.0,  # FR 2023
+            "3": 43790.0   # FR 2024
+        }
+    }
+
+    records = EurostatConnector.parse_json_stat(mock_data, "nama_10_fte")
+    assert len(records) == 4
+    de_2024 = next(r for r in records if r["country_code"] == "DEU" and r["period"] == 2024)
+    assert de_2024["value"] == 53791.0
+    assert de_2024["unit"] == "Euro"
+    assert de_2024["dataset_code"] == "nama_10_fte"
+

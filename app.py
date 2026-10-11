@@ -43,10 +43,14 @@ def load_all_observations() -> pd.DataFrame:
         obs_count = db.query(ObservationModel).count()
         ind_count = db.query(ObservationModel.indicator_id).distinct().count()
         sample_pop = db.query(ObservationModel).filter_by(country_code="CZE", indicator_id="POPULATION", period=2024).first()
+        sample_fte = db.query(ObservationModel).filter_by(indicator_id="AVG_FULL_TIME_ADJUSTED_SALARY").first()
+        has_old_wage = db.query(ObservationModel).filter_by(indicator_id="AVG_ANNUAL_WAGE").first() is not None
         needs_reseed = (
             obs_count < 100
             or ind_count < len(INDICATORS)
             or (sample_pop and sample_pop.value < 8000000)
+            or sample_fte is None
+            or has_old_wage
         )
         if needs_reseed:
             generate_historical_series(force_reseed=True)

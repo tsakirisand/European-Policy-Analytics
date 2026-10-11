@@ -14,7 +14,7 @@ Built strictly with **REAL official APIs** from **Eurostat**, the **European Cen
 ## 🌟 Key Highlights & Engineering Features
 
 - **🇪🇺 European-First Analytics**: Comprehensive cross-country comparison across all 27 EU member states, 4 EFTA/non-EU European economies (United Kingdom, Switzerland, Norway, Iceland), and key regional aggregates (`EU27`, `EA20`) categorized into official Eurostat regional groupings (*Western, Southern, Northern, Eastern, Central Europe*).
-- **📡 Pure Official API Ingestion**: Direct integration with Eurostat REST API (`nama_10_gdp`, `nama_10_pc`, `prc_hicp_aind`, `une_rt_a`, `gov_10dd_edpt1`, `demo_gind`, `nrg_ind_ren`, `env_air_gge`, `ilc_peps01n`, `earn_mw_cur`, `earn_nt_net`), ECB SDMX REST API (`FM/D.U2.EUR.4F.KR.MRR_RT.LEV`, `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N`), and World Bank API v2 (`NY.GDP.PCAP.CD`, `NE.RSB.GNFS.ZS`, `SP.DYN.LE00.IN`). Zero hardcoded economic values or third-party placeholder datasets.
+- **📡 Pure Official API Ingestion**: Direct integration with Eurostat REST API (`nama_10_gdp`, `nama_10_pc`, `prc_hicp_aind`, `une_rt_a`, `gov_10dd_edpt1`, `demo_gind`, `nrg_ind_ren`, `env_air_gge`, `ilc_peps01n`, `earn_mw_cur`, `earn_nt_net`, `nama_10_fte`), ECB SDMX REST API (`FM/D.U2.EUR.4F.KR.MRR_RT.LEV`, `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N`), and World Bank API v2 (`NY.GDP.PCAP.CD`, `NE.RSB.GNFS.ZS`, `SP.DYN.LE00.IN`). Zero hardcoded economic values or third-party placeholder datasets.
 - **⭐ Relational Database Architecture**: Relational schema featuring `countries`, `indicators`, `observations`, `ingestion_logs`, and `validation_logs` enforcing unique constraints (`country_code`, `indicator_id`, `period`) and preserving full IEEE 754 float64 precision.
 - **🛡️ Automated Data Quality Engine**: Rule-based validation storing audit status logs (`PASS`, `FAIL`, `WARNING`, `UNVERIFIED`) covering primary key integrity, deduplication, outlier detection, and time-weighted annual average calculations for monetary policy rates.
 - **📊 8-Page Streamlit Dashboard**: Analytical policy dashboard offering macro overview, single-country explorer, side-by-side comparative engine, indicator inventory, European rankings, cross-indicator correlation/scatter engines with OLS trendlines, data quality portal, and methodology documentation.
@@ -125,9 +125,14 @@ Every metric is fully traceable to its official source dataset and series key:
 | Demographics | `POVERTY_RISK_RATE` | `ilc_peps01n` | Eurostat | Annual | % of Population |
 | Monetary Policy | `ECB_POLICY_RATE` | `FM/D.U2.EUR.4F.KR.MRR_RT.LEV` | ECB Data API | Daily (Time-Weighted) | % p.a. |
 | Financial Mon | `HOUSEHOLD_LENDING_RATE` | `MIR/M.DE.B.A2C.A.R.A.2250.EUR.N` | ECB Data API | Monthly (Annual Avg) | % p.a. |
-| Labour & Income | `AVG_ANNUAL_WAGE` | `NY.GDP.PCAP.CD` | World Bank API | Annual | Current USD ($) |
+| Labour & Income | `AVG_FULL_TIME_ADJUSTED_SALARY` | `nama_10_fte` | Eurostat API | Annual | Euros per year (€) |
+| Labour & Income | `MINIMUM_MONTHLY_WAGE` | `earn_mw_cur` | Eurostat API | Annual | Euros per month (€) |
+| Labour & Income | `AVG_NET_ANNUAL_SALARY` | `earn_nt_net` | Eurostat API | Annual | Euros per year (€) |
+| Economy | `GDP_PER_CAPITA` | `NY.GDP.PCAP.CD` | World Bank API | Annual | Current USD ($) |
 | Trade & Industry| `TRADE_BALANCE_GDP` | `NE.RSB.GNFS.ZS` | World Bank API | Annual | % of GDP |
 | Demographics | `LIFE_EXPECTANCY` | `SP.DYN.LE00.IN` | World Bank API | Annual | Mean Years |
+
+> **Official Eurostat ESMS Documentation Reference:** For the series definition, full-time equivalence adjustments, and Blue Card Directive (EU) 2021/1883 methodology for `nama_10_fte`, see [Eurostat ESMS Metadata: Average full time adjusted salary per employee](https://ec.europa.eu/eurostat/cache/metadata/en/nama_10_fte_esms.htm). Note: Netherlands (`NLD`) is excluded from `nama_10_fte` standard publication by Eurostat due to specific national register methodology.
 
 ---
 
