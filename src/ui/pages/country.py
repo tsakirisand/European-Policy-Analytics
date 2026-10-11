@@ -139,104 +139,7 @@ def render(df_obs: pd.DataFrame):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 2. Strategic Macroeconomic Performance & Radar Benchmark
-    with st.expander(f"📊 Macroeconomic Performance Profile & European Standings ({meta.get('name')} vs {bench_meta.get('name')})", expanded=True):
-        col_radar, col_rankings = st.columns([1.2, 1])
-
-        with col_radar:
-            st.markdown(f"##### 🕸️ Multidimensional Policy Radar (0-100 Benchmark)")
-            
-            # Compute normalized performance indices across 5 dimensions for selected country & benchmark
-            def get_latest_val(c_code, i_id):
-                sub = df_obs[(df_obs["country_code"] == c_code) & (df_obs["indicator_id"] == i_id)].sort_values("period")
-                return sub.iloc[-1]["value"] if not sub.empty else None
-
-            # 5 Dimensions:
-            # 1. Living Standards: GDP_PC_PPP (relative to 150)
-            # 2. Employment: UNEMP_RATE (inverted: 20 - unemp / 20 * 100)
-            # 3. Wage & Earnings: AVG_NET_ANNUAL_SALARY (relative to 50,000)
-            # 4. Fiscal Stability: GOV_DEBT_GDP (inverted: 150 - debt / 150 * 100)
-            # 5. Green Economy: RENEWABLE_ENERGY_SHARE (relative to 60)
-            categories = ["Living Standards", "Labour Health", "Earnings Level", "Fiscal Health", "Green Transition"]
-
-            c_gdp = get_latest_val(selected_iso3, "GDP_PC_PPP") or 80.0
-            c_u = get_latest_val(selected_iso3, "UNEMP_RATE") or 6.0
-            c_sal = get_latest_val(selected_iso3, "AVG_NET_ANNUAL_SALARY") or 20000.0
-            c_debt = get_latest_val(selected_iso3, "GOV_DEBT_GDP") or 60.0
-            c_ren = get_latest_val(selected_iso3, "RENEWABLE_ENERGY_SHARE") or 20.0
-
-            b_gdp = get_latest_val(benchmark_target, "GDP_PC_PPP") or 100.0
-            b_u = get_latest_val(benchmark_target, "UNEMP_RATE") or 6.0
-            b_sal = get_latest_val(benchmark_target, "AVG_NET_ANNUAL_SALARY") or 28200.0
-            b_debt = get_latest_val(benchmark_target, "GOV_DEBT_GDP") or 81.0
-            b_ren = get_latest_val(benchmark_target, "RENEWABLE_ENERGY_SHARE") or 23.0
-
-            c_scores = [
-                min(100.0, max(10.0, (c_gdp / 160.0) * 100.0)),
-                min(100.0, max(10.0, ((20.0 - c_u) / 18.0) * 100.0)),
-                min(100.0, max(10.0, (c_sal / 55000.0) * 100.0)),
-                min(100.0, max(10.0, ((160.0 - c_debt) / 140.0) * 100.0)),
-                min(100.0, max(10.0, (c_ren / 65.0) * 100.0))
-            ]
-
-            b_scores = [
-                min(100.0, max(10.0, (b_gdp / 160.0) * 100.0)),
-                min(100.0, max(10.0, ((20.0 - b_u) / 18.0) * 100.0)),
-                min(100.0, max(10.0, (b_sal / 55000.0) * 100.0)),
-                min(100.0, max(10.0, ((160.0 - b_debt) / 140.0) * 100.0)),
-                min(100.0, max(10.0, (b_ren / 65.0) * 100.0))
-            ]
-
-            fig_radar = create_radar_chart(
-                country_name=meta.get("name", selected_iso3),
-                categories=categories,
-                country_scores=[round(s, 1) for s in c_scores],
-                benchmark_name=bench_meta.get("name", benchmark_target),
-                benchmark_scores=[round(s, 1) for s in b_scores]
-            )
-            st.plotly_chart(fig_radar, use_container_width=True)
-
-        with col_rankings:
-            st.markdown(f"##### 🏆 European Standing & Rank Positions (2024)")
-            st.markdown(f"*Where {meta.get('name')} places across 31 European nations:*")
-
-            rank_trackers = [
-                ("GDP_PC_PPP", "Living Standards (PPS)", False),
-                ("GDP_REAL_GROWTH", "Real GDP Growth Rate", False),
-                ("UNEMP_RATE", "Low Unemployment Rate", True),
-                ("AVG_NET_ANNUAL_SALARY", "Average Net Salary", False),
-                ("MINIMUM_MONTHLY_WAGE", "Minimum Monthly Wage", False),
-                ("RENEWABLE_ENERGY_SHARE", "Renewable Energy Share", False),
-                ("GOV_DEBT_GDP", "Low Government Debt (% GDP)", True),
-                ("LIFE_EXPECTANCY", "Life Expectancy at Birth", False)
-            ]
-
-            total_nations = len(all_countries)
-
-            for ind_id, label_rank, asc_flag in rank_trackers:
-                df_rk = rank_countries(df_obs, ind_id, period=2024, ascending=asc_flag)
-                if not df_rk.empty:
-                    match_rk = df_rk[df_rk["country_code"] == selected_iso3]
-                    if not match_rk.empty:
-                        rk_val = int(match_rk.iloc[0]["rank"])
-                        rk_val_num = match_rk.iloc[0]["value"]
-                        ind_m = INDICATORS.get(ind_id, {})
-                        
-                        # Rank color badge
-                        badge_color = "#34d399" if rk_val <= 10 else ("#38bdf8" if rk_val <= 20 else "#fbbf24")
-                        st.markdown(f"""
-                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0.6rem; margin-bottom: 0.35rem; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b;">
-                                <span style="font-size: 0.85rem; color: #cbd5e1;">{label_rank}</span>
-                                <div>
-                                    <span style="font-size: 0.85rem; color: #94a3b8; margin-right: 0.5rem;">{rk_val_num:,.1f} {ind_m.get('unit_symbol','')}</span>
-                                    <span style="font-weight: 700; color: {badge_color}; font-size: 0.85rem; background: #1e293b; padding: 0.15rem 0.45rem; border-radius: 4px;">#{rk_val} of {len(df_rk)}</span>
-                                </div>
-                            </div>
-                        """, unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # 3. Eight Policy Domain Deep-Dive Tabs + Strategic Synthesis Tab
+    # 2. Eight Policy Domain Deep-Dive Tabs + Strategic Synthesis Tab
     domain_keys = list(DOMAINS.keys())
     tab_titles = ["🧠 What the Data Show & Strategic Analysis"] + [f"{DOMAINS[d]['icon']} {DOMAINS[d]['name']}" for d in domain_keys]
     tabs = st.tabs(tab_titles)
@@ -258,6 +161,90 @@ def render(df_obs: pd.DataFrame):
                 </div>
             </div>
         """, unsafe_allow_html=True)
+
+        # Strategic Macroeconomic Performance & Radar Benchmark
+        with st.expander(f"📊 Macroeconomic Performance Profile & European Standings ({meta.get('name')} vs {bench_meta.get('name')})", expanded=False):
+            col_radar, col_rankings = st.columns([1.2, 1])
+
+            with col_radar:
+                st.markdown(f"##### 🕸️ Multidimensional Policy Radar (0-100 Benchmark)")
+                
+                def get_latest_val(c_code, i_id):
+                    sub = df_obs[(df_obs["country_code"] == c_code) & (df_obs["indicator_id"] == i_id)].sort_values("period")
+                    return sub.iloc[-1]["value"] if not sub.empty else None
+
+                categories = ["Living Standards", "Labour Health", "Earnings Level", "Fiscal Health", "Green Transition"]
+
+                c_gdp = get_latest_val(selected_iso3, "GDP_PC_PPP") or 80.0
+                c_u = get_latest_val(selected_iso3, "UNEMP_RATE") or 6.0
+                c_sal = get_latest_val(selected_iso3, "AVG_NET_ANNUAL_SALARY") or 20000.0
+                c_debt = get_latest_val(selected_iso3, "GOV_DEBT_GDP") or 60.0
+                c_ren = get_latest_val(selected_iso3, "RENEWABLE_ENERGY_SHARE") or 20.0
+
+                b_gdp = get_latest_val(benchmark_target, "GDP_PC_PPP") or 100.0
+                b_u = get_latest_val(benchmark_target, "UNEMP_RATE") or 6.0
+                b_sal = get_latest_val(benchmark_target, "AVG_NET_ANNUAL_SALARY") or 28200.0
+                b_debt = get_latest_val(benchmark_target, "GOV_DEBT_GDP") or 81.0
+                b_ren = get_latest_val(benchmark_target, "RENEWABLE_ENERGY_SHARE") or 23.0
+
+                c_scores = [
+                    min(100.0, max(10.0, (c_gdp / 160.0) * 100.0)),
+                    min(100.0, max(10.0, ((20.0 - c_u) / 18.0) * 100.0)),
+                    min(100.0, max(10.0, (c_sal / 55000.0) * 100.0)),
+                    min(100.0, max(10.0, ((160.0 - c_debt) / 140.0) * 100.0)),
+                    min(100.0, max(10.0, (c_ren / 65.0) * 100.0))
+                ]
+
+                b_scores = [
+                    min(100.0, max(10.0, (b_gdp / 160.0) * 100.0)),
+                    min(100.0, max(10.0, ((20.0 - b_u) / 18.0) * 100.0)),
+                    min(100.0, max(10.0, (b_sal / 55000.0) * 100.0)),
+                    min(100.0, max(10.0, ((160.0 - b_debt) / 140.0) * 100.0)),
+                    min(100.0, max(10.0, (b_ren / 65.0) * 100.0))
+                ]
+
+                fig_radar = create_radar_chart(
+                    country_name=meta.get("name", selected_iso3),
+                    categories=categories,
+                    country_scores=[round(s, 1) for s in c_scores],
+                    benchmark_name=bench_meta.get("name", benchmark_target),
+                    benchmark_scores=[round(s, 1) for s in b_scores]
+                )
+                st.plotly_chart(fig_radar, use_container_width=True)
+
+            with col_rankings:
+                st.markdown(f"##### 🏆 European Standing & Rank Positions (2024)")
+                st.markdown(f"*Where {meta.get('name')} places across 31 European nations:*")
+
+                rank_trackers = [
+                    ("GDP_PC_PPP", "Living Standards (PPS)", False),
+                    ("GDP_REAL_GROWTH", "Real GDP Growth Rate", False),
+                    ("UNEMP_RATE", "Low Unemployment Rate", True),
+                    ("AVG_NET_ANNUAL_SALARY", "Average Net Salary", False),
+                    ("MINIMUM_MONTHLY_WAGE", "Minimum Monthly Wage", False),
+                    ("RENEWABLE_ENERGY_SHARE", "Renewable Energy Share", False),
+                    ("GOV_DEBT_GDP", "Low Government Debt (% GDP)", True),
+                    ("LIFE_EXPECTANCY", "Life Expectancy at Birth", False)
+                ]
+
+                for ind_id, label_rank, asc_flag in rank_trackers:
+                    df_rk = rank_countries(df_obs, ind_id, period=2024, ascending=asc_flag)
+                    if not df_rk.empty:
+                        match_rk = df_rk[df_rk["country_code"] == selected_iso3]
+                        if not match_rk.empty:
+                            rk_val = int(match_rk.iloc[0]["rank"])
+                            rk_val_num = match_rk.iloc[0]["value"]
+                            ind_m = INDICATORS.get(ind_id, {})
+                            badge_color = "#34d399" if rk_val <= 10 else ("#38bdf8" if rk_val <= 20 else "#fbbf24")
+                            st.markdown(f"""
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0.6rem; margin-bottom: 0.35rem; background: #0f172a; border-radius: 6px; border: 1px solid #1e293b;">
+                                    <span style="font-size: 0.85rem; color: #cbd5e1;">{label_rank}</span>
+                                    <div>
+                                        <span style="font-size: 0.85rem; color: #94a3b8; margin-right: 0.5rem;">{rk_val_num:,.1f} {ind_m.get('unit_symbol','')}</span>
+                                        <span style="font-weight: 700; color: {badge_color}; font-size: 0.85rem; background: #1e293b; padding: 0.15rem 0.45rem; border-radius: 4px;">#{rk_val} of {len(df_rk)}</span>
+                                    </div>
+                                </div>
+                            """, unsafe_allow_html=True)
 
         # What the Data Show (4 Core Pillars)
         st.markdown("#### 🔍 What the Data Explicitly Demonstrate")
